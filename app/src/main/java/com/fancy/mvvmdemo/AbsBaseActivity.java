@@ -18,12 +18,12 @@ public abstract class AbsBaseActivity extends AppCompatActivity {
             savedInstanceState.remove("android:support:fragments");
         }
         initView();
+        initData();
     }
 
     protected void initView() {
         DataBindingUtil.setContentView(this, initContentView());
     }
-
 
     /**
      * 初始化布局文件
@@ -31,4 +31,9 @@ public abstract class AbsBaseActivity extends AppCompatActivity {
      * @return
      */
     protected abstract int initContentView();
+
+    /**
+     * 初始化数据
+     */
+    protected abstract void initData();
 }
