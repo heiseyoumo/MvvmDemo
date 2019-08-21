@@ -39,6 +39,12 @@ public abstract class BaseActivity<V extends ViewDataBinding, VM extends ViewMod
         }
     }
 
+
+    /**
+     * 初始化数据
+     */
+    protected abstract void initData();
+
     /**
      * 创建ViewModel
      *

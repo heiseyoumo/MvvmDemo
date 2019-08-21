@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:binding="http://schemas.android.com/apk/res-auto">
+    xmlns:bind="http://schemas.android.com/apk/res-auto">
 
 
     <data>
 
         <variable
-            name="viewModel"
-            type="com.fancy.mvvmdemo.model.LoginViewModel" />
-
-        <variable
             name="user"
             type="com.fancy.mvvmdemo.bean.User" />
+
+        <variable
+            name="url"
+            type="String" />
     </data>
 
     <RelativeLayout
@@ -36,6 +36,13 @@
             android:text="@{user.userSex}"
             android:textColor="#f00"
             android:textSize="23sp" />
+
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_below="@+id/userSex"
+            android:layout_centerHorizontal="true"
+            bind:image="@{url}" />
 
         <LinearLayout
             android:layout_width="match_parent"

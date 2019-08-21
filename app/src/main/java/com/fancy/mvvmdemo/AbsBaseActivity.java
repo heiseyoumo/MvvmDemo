@@ -18,7 +18,6 @@ public abstract class AbsBaseActivity extends AppCompatActivity {
             savedInstanceState.remove("android:support:fragments");
         }
         initView();
-        initData();
     }
 
     protected void initView() {
@@ -31,9 +30,4 @@ public abstract class AbsBaseActivity extends AppCompatActivity {
      * @return
      */
     protected abstract int initContentView();
-
-    /**
-     * 初始化数据
-     */
-    protected abstract void initData();
 }

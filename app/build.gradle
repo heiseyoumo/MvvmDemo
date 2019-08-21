@@ -41,4 +41,7 @@ dependencies {
 
     implementation 'android.arch.lifecycle:extensions:1.1.1'
     annotationProcessor rootProject.ext.dependencies["lifecycle-compiler"]
+
+    implementation 'com.github.bumptech.glide:glide:4.9.0'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.9.0'
 }

@@ -1,31 +1,39 @@
 package com.fancy.mvvmdemo.bean;
 
+import android.databinding.BaseObservable;
+import android.databinding.Bindable;
+
+import com.android.databinding.library.baseAdapters.BR;
+
 /**
  * @author pengkuanwang
  * @date 2019-08-19
  */
-public class User {
-    private String UserName;
-    private String UserSex;
+public class User extends BaseObservable {
+    private String userName;
+    private String userSex;
 
+    @Bindable
     public String getUserName() {
-        return UserName;
+        return userName;
     }
 
+    @Bindable
     public void setUserName(String userName) {
-        UserName = userName;
+        this.userName = userName;
+        notifyPropertyChanged(BR.userName);
     }
 
     public String getUserSex() {
-        return UserSex;
+        return userSex;
     }
 
     public void setUserSex(String userSex) {
-        UserSex = userSex;
+        this.userSex = userSex;
     }
 
     public User(String userName, String userSex) {
-        UserName = userName;
-        UserSex = userSex;
+        this.userName = userName;
+        this.userSex = userSex;
     }
 }
