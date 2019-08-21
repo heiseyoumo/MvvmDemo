@@ -32,6 +32,7 @@
             android:textSize="23sp" />
 
         <TextView
+            android:id="@+id/userSex"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/userName"
@@ -40,6 +41,15 @@
             android:padding="10dp"
             android:text="@{user.userSex}"
             android:textColor="#f00"
+            android:textSize="23sp" />
+
+        <Button
+            android:id="@+id/login"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/userSex"
+            android:background="#f00"
+            android:text="登录"
             android:textSize="23sp" />
     </RelativeLayout>
 </layout>
