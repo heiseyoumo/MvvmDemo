@@ -1,0 +1,5 @@
+ext {
+    dependencies = [
+            "lifecycle-compiler": "android.arch.lifecycle:compiler:1.1.1",
+    ]
+}
