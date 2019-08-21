@@ -26,5 +26,6 @@
         <activity android:name=".DemoActivity" />
         <activity android:name=".LoginActivity" />
         <activity android:name=".PersonActivity" />
+        <activity android:name=".RecyclerViewActivity"/>
     </application>
 </manifest>
