@@ -2,6 +2,7 @@ package com.fancy.mvvmdemo.viewmodel;
 
 import android.app.Application;
 import android.databinding.ObservableField;
+import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.view.View;
 
@@ -54,5 +55,15 @@ public class LoginViewModel extends BaseViewModel<AppRepository> {
     public void register(String phone, String code) {
         ToastUtil.showCustomToast("姓名:" + userName + ",密码:" + phone);
         Observable<HttpResult<UserBean>> login = model.register(phone, code);
+    }
+
+    public void show() {
+        showDialog();
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                dismissDialog();
+            }
+        }, 3000);
     }
 }
