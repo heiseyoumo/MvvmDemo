@@ -11,6 +11,8 @@ import com.fancy.mvvmdemo.bean.HttpResult;
 import com.fancy.mvvmdemo.bean.UserBean;
 import com.fancy.mvvmdemo.model.AppRepository;
 import com.fancy.mvvmdemo.util.ToastUtil;
+import com.fancy.mvvmdemo.view.BindingAction;
+import com.fancy.mvvmdemo.view.BindingCommand;
 
 import io.reactivex.Observable;
 
@@ -43,6 +45,15 @@ public class LoginViewModel extends BaseViewModel<AppRepository> {
             login(name, pwd);
         }
     };
+    /**
+     * 注册按钮的点击事件
+     */
+    public BindingCommand registerOnClickCommand = new BindingCommand(new BindingAction() {
+        @Override
+        public void call() {
+            ToastUtil.showCustomToast("点击注册按钮");
+        }
+    });
 
     /**
      * 登录

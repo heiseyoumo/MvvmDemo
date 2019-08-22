@@ -34,7 +34,6 @@ public class RxHelper {
         return transformer;
     }
 
-
     public static <T> ObservableTransformer<HttpResult<T>, T> handleResult() {
         return new ObservableTransformer<HttpResult<T>, T>() {
             @Override

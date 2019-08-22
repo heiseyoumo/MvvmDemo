@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:bind="http://schemas.android.com/apk/res-auto">
+    xmlns:binding="http://schemas.android.com/apk/res-auto">
 
 
     <data>
@@ -66,7 +66,8 @@
                 android:background="#000"
                 android:text="注册"
                 android:textColor="@color/white"
-                android:textSize="18sp" />
+                android:textSize="18sp"
+                binding:onClickCommand="@{viewModel.registerOnClickCommand}" />
 
             <Button
                 android:id="@+id/showBtn"
