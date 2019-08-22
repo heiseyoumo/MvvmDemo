@@ -5,7 +5,7 @@
 
         <variable
             name="userBean"
-            type="com.fancy.mvvmdemo.http.UserBean" />
+            type="com.fancy.mvvmdemo.bean.UserBean" />
     </data>
 
     <RelativeLayout
@@ -17,7 +17,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="10dp"
-            android:text="@{userBean.name}"
+            android:text="@{userBean.token}"
             android:textColor="#f00"
             android:textSize="23sp" />
 
@@ -25,7 +25,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
-            android:text="@{String.valueOf(userBean.age)}"
+            android:text="@{userBean.nickName}"
             android:textColor="#f00"
             android:textSize="23sp" />
     </RelativeLayout>

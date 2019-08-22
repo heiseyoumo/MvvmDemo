@@ -1,6 +1,7 @@
 package com.fancy.mvvmdemo.http;
 
 import com.fancy.mvvmdemo.bean.HttpResult;
+import com.fancy.mvvmdemo.bean.UserBean;
 
 import io.reactivex.Observable;
 import okhttp3.RequestBody;

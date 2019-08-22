@@ -4,8 +4,8 @@ import android.content.Context;
 import android.databinding.ObservableArrayList;
 
 import com.fancy.mvvmdemo.R;
+import com.fancy.mvvmdemo.bean.UserBean;
 import com.fancy.mvvmdemo.databinding.RecycleItemInfoBinding;
-import com.fancy.mvvmdemo.http.UserBean;
 
 /**
  * @author pengkuanwang

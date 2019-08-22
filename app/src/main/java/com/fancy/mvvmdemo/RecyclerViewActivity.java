@@ -4,8 +4,8 @@ import android.databinding.ObservableArrayList;
 import android.support.v7.widget.LinearLayoutManager;
 
 import com.fancy.mvvmdemo.adapter.UserInfoAdapter;
+import com.fancy.mvvmdemo.bean.UserBean;
 import com.fancy.mvvmdemo.databinding.ActivityRecyclerBinding;
-import com.fancy.mvvmdemo.http.UserBean;
 import com.fancy.mvvmdemo.viewmodel.RecyclerViewModel;
 
 /**
@@ -18,7 +18,7 @@ public class RecyclerViewActivity extends BaseActivity<ActivityRecyclerBinding, 
     @Override
     protected void initData() {
         for (int i = 0; i < 10; i++) {
-            userBeans.add(new UserBean("pkw" + i, i));
+            userBeans.add(new UserBean("pkw" + i, String.valueOf(i)));
         }
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         binding.recyclerView.setLayoutManager(linearLayoutManager);

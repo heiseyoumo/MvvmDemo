@@ -3,16 +3,6 @@ package com.fancy.mvvmdemo;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.view.View;
-
-import com.fancy.mvvmdemo.bean.HttpResult;
-import com.fancy.mvvmdemo.http.Api;
-import com.fancy.mvvmdemo.http.ProgressSubscriber;
-import com.fancy.mvvmdemo.http.UserBean;
-import com.fancy.mvvmdemo.util.HttpUtil;
-import com.fancy.mvvmdemo.util.Util;
-
-import java.util.HashMap;
 
 import io.reactivex.Observable;
 import io.reactivex.ObservableEmitter;
@@ -62,27 +52,6 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onComplete() {
 
-            }
-        });
-
-        findViewById(R.id.textView).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                HashMap<String, String> hashMap = new HashMap<>();
-                Observable<HttpResult<UserBean>> observable = Api.getDefault().login(Util.getRequest(hashMap));
-                HttpUtil.getInstance().toSubscribe(observable, new ProgressSubscriber<UserBean>(MainActivity.this) {
-
-                    @Override
-                    protected void _onNext(UserBean userBean) {
-                        String name = userBean.getName();
-                        System.out.println(name);
-                    }
-
-                    @Override
-                    protected void _onError(String code, String message) {
-                        System.out.println(code);
-                    }
-                });
             }
         });
     }

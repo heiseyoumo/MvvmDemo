@@ -8,8 +8,8 @@ import android.os.SystemClock;
 
 import com.fancy.mvvmdemo.bean.HttpResult;
 import com.fancy.mvvmdemo.bean.User;
+import com.fancy.mvvmdemo.bean.UserBean;
 import com.fancy.mvvmdemo.http.Api;
-import com.fancy.mvvmdemo.http.UserBean;
 
 import java.util.HashMap;
 
@@ -46,17 +46,6 @@ public class UserRepository {
                 });
             }
         }).start();
-        /*HttpUtil.getInstance().toSubscribe(observable, new ProgressSubscriber<User>() {
-            @Override
-            protected void _onNext(User user) {
-                mutableLiveData.setValue(user);
-            }
-
-            @Override
-            protected void _onError(String code, String message) {
-
-            }
-        });*/
         return mutableLiveData;
     }
 }

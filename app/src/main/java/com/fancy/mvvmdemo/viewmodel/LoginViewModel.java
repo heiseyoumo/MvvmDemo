@@ -2,14 +2,13 @@ package com.fancy.mvvmdemo.viewmodel;
 
 import android.app.Application;
 import android.arch.lifecycle.MutableLiveData;
-import android.arch.lifecycle.ViewModel;
 import android.content.Context;
 import android.os.Handler;
 import android.os.Looper;
 import android.support.annotation.NonNull;
 
 import com.fancy.mvvmdemo.BaseViewModel;
-import com.fancy.mvvmdemo.http.UserBean;
+import com.fancy.mvvmdemo.bean.UserBean;
 import com.fancy.mvvmdemo.model.LoginModel;
 import com.fancy.mvvmdemo.util.ToastUtil;
 import com.fancy.mvvmdemo.view.BindingAction;
@@ -46,7 +45,7 @@ public class LoginViewModel extends BaseViewModel<LoginModel> {
                     handler.post(new Runnable() {
                         @Override
                         public void run() {
-                            mutableLiveData.setValue(new UserBean("pkw", 23));
+                            mutableLiveData.setValue(new UserBean("pkw", "23"));
                         }
                     });
                 } catch (InterruptedException e) {
