@@ -45,7 +45,6 @@
             android:layout_height="wrap_content"
             android:layout_above="@+id/imageView"
             android:layout_marginBottom="16dp"
-            android:background="@mipmap/btn_login"
             android:orientation="vertical"
             android:padding="6dp">
 
@@ -53,8 +52,18 @@
                 android:id="@+id/btnClick"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="?selectableItemBackground"
+                android:background="#000"
                 android:text="登录"
+                android:textColor="@color/white"
+                android:textSize="18sp" />
+
+            <Button
+                android:id="@+id/btnRegister"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:background="#000"
+                android:text="注册"
                 android:textColor="@color/white"
                 android:textSize="18sp" />
         </LinearLayout>

@@ -10,6 +10,21 @@ import io.reactivex.Observable;
  * @date 2019-08-22
  */
 public interface HttpDataSource {
-    //模拟登录
-    Observable<HttpResult<UserBean>> login(String name,String pwd);
+    /**
+     * 登录接口
+     *
+     * @param name
+     * @param pwd
+     * @return
+     */
+    Observable<HttpResult<UserBean>> login(String name, String pwd);
+
+    /**
+     * 注册接口
+     *
+     * @param mobileNo
+     * @param code
+     * @return
+     */
+    Observable<HttpResult<UserBean>> register(String mobileNo, String code);
 }

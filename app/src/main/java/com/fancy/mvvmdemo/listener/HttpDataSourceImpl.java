@@ -35,8 +35,16 @@ public class HttpDataSourceImpl implements HttpDataSource {
     @Override
     public Observable<HttpResult<UserBean>> login(String name, String pwd) {
         HashMap<String, String> hashMap = new HashMap<>();
-        hashMap.put("userName", "name");
-        hashMap.put("pwd", "pwd");
+        hashMap.put("userName", name);
+        hashMap.put("pwd", pwd);
         return apiService.login(Util.getRequest(hashMap));
+    }
+
+    @Override
+    public Observable<HttpResult<UserBean>> register(String mobileNo, String code) {
+        HashMap<String, String> hashMap = new HashMap<>();
+        hashMap.put("mobileNo", mobileNo);
+        hashMap.put("pwd", code);
+        return apiService.register(Util.getRequest(hashMap));
     }
 }

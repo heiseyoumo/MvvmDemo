@@ -34,4 +34,9 @@ public class AppRepository extends BaseModel implements HttpDataSource {
     public Observable<HttpResult<UserBean>> login(String name, String pwd) {
         return mHttpDataSource.login(name, pwd);
     }
+
+    @Override
+    public Observable<HttpResult<UserBean>> register(String mobileNo, String code) {
+        return mHttpDataSource.register(mobileNo, code);
+    }
 }

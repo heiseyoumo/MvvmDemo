@@ -41,5 +41,12 @@ public class LoginActivity extends BaseActivity<ActivityLoginBinding, LoginViewM
                 viewModel.login(name, pwd);
             }
         });
+
+        binding.btnRegister.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                viewModel.register("15316161570", "1234");
+            }
+        });
     }
 }

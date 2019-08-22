@@ -34,8 +34,25 @@ public class LoginViewModel extends BaseViewModel<AppRepository> {
         login(name, pwd);
     }
 
+    /**
+     * 登录
+     *
+     * @param userName
+     * @param pwd
+     */
     public void login(String userName, String pwd) {
         ToastUtil.showCustomToast("姓名:" + userName + ",密码:" + pwd);
         Observable<HttpResult<UserBean>> login = model.login(userName, pwd);
+    }
+
+    /**
+     * 注册
+     *
+     * @param phone
+     * @param code
+     */
+    public void register(String phone, String code) {
+        ToastUtil.showCustomToast("姓名:" + userName + ",密码:" + phone);
+        Observable<HttpResult<UserBean>> login = model.register(phone, code);
     }
 }
