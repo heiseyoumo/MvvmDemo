@@ -4,7 +4,7 @@ import android.os.Handler;
 
 import com.fancy.mvvmdemo.bean.User;
 import com.fancy.mvvmdemo.databinding.ActivityLoginBinding;
-import com.fancy.mvvmdemo.model.LoginViewModel;
+import com.fancy.mvvmdemo.viewmodel.LoginViewModel;
 
 /**
  * @author pengkuanwang

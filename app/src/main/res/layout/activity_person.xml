@@ -12,7 +12,7 @@
 
         <variable
             name="viewModel"
-            type="com.fancy.mvvmdemo.model.PersonViewModel" />
+            type="com.fancy.mvvmdemo.viewmodel.PersonViewModel" />
     </data>
 
     <LinearLayout

@@ -1,12 +1,16 @@
-package com.fancy.mvvmdemo.model;
+package com.fancy.mvvmdemo.viewmodel;
 
+import android.app.Application;
 import android.arch.lifecycle.MutableLiveData;
 import android.arch.lifecycle.ViewModel;
 import android.content.Context;
 import android.os.Handler;
 import android.os.Looper;
+import android.support.annotation.NonNull;
 
+import com.fancy.mvvmdemo.BaseViewModel;
 import com.fancy.mvvmdemo.http.UserBean;
+import com.fancy.mvvmdemo.model.LoginModel;
 import com.fancy.mvvmdemo.util.ToastUtil;
 import com.fancy.mvvmdemo.view.BindingAction;
 import com.fancy.mvvmdemo.view.BindingCommand;
@@ -15,7 +19,7 @@ import com.fancy.mvvmdemo.view.BindingCommand;
  * @author pengkuanwang
  * @date 2019-08-21
  */
-public class LoginViewModel extends ViewModel {
+public class LoginViewModel extends BaseViewModel<LoginModel> {
     private Handler handler = new Handler(Looper.getMainLooper());
     private BindingCommand loginOnClickCommand = new BindingCommand(new BindingAction() {
         @Override
@@ -23,6 +27,10 @@ public class LoginViewModel extends ViewModel {
             login();
         }
     });
+
+    public LoginViewModel(@NonNull Application application) {
+        super(application);
+    }
 
     private void login() {
         ToastUtil.showCustomToast("登录了啊");

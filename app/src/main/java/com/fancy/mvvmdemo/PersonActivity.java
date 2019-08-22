@@ -3,7 +3,7 @@ package com.fancy.mvvmdemo;
 import android.os.Handler;
 
 import com.fancy.mvvmdemo.databinding.ActivityPersonBinding;
-import com.fancy.mvvmdemo.model.PersonViewModel;
+import com.fancy.mvvmdemo.viewmodel.PersonViewModel;
 
 /**
  * @author pengkuanwang

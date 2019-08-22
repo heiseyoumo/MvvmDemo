@@ -5,7 +5,7 @@ import android.support.annotation.Nullable;
 
 import com.fancy.mvvmdemo.bean.User;
 import com.fancy.mvvmdemo.databinding.ActivityUserBinding;
-import com.fancy.mvvmdemo.model.UserViewModel;
+import com.fancy.mvvmdemo.viewmodel.UserViewModel;
 
 /**
  * @author pengkuanwang

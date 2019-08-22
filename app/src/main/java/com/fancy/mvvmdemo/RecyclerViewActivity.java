@@ -6,7 +6,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import com.fancy.mvvmdemo.adapter.UserInfoAdapter;
 import com.fancy.mvvmdemo.databinding.ActivityRecyclerBinding;
 import com.fancy.mvvmdemo.http.UserBean;
-import com.fancy.mvvmdemo.model.RecyclerViewModel;
+import com.fancy.mvvmdemo.viewmodel.RecyclerViewModel;
 
 /**
  * @author pengkuanwang

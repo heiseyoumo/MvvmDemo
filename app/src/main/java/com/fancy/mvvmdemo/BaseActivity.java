@@ -15,7 +15,7 @@ import java.lang.reflect.Type;
  * @author pengkuanwang
  * @date 2019-08-20
  */
-public abstract class BaseActivity<V extends ViewDataBinding, VM extends ViewModel> extends AbsBaseActivity {
+public abstract class BaseActivity<V extends ViewDataBinding, VM extends BaseViewModel> extends AbsBaseActivity {
     V binding;
     VM viewModel;
 
