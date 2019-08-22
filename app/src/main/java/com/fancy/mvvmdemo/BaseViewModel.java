@@ -11,7 +11,8 @@ import android.support.annotation.NonNull;
 public class BaseViewModel<M extends BaseModel> extends AndroidViewModel {
     protected M model;
 
-    public BaseViewModel(@NonNull Application application) {
+    public BaseViewModel(@NonNull Application application, M model) {
         super(application);
+        this.model = model;
     }
 }

@@ -18,6 +18,11 @@ public class PersonActivity extends BaseActivity<ActivityPersonBinding, PersonVi
     }
 
     @Override
+    public int initVariableId() {
+        return BR.viewModel;
+    }
+
+    @Override
     protected void initData() {
         binding.setViewModel(viewModel);
     }

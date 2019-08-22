@@ -18,6 +18,7 @@ import java.lang.reflect.Type;
 public abstract class BaseActivity<V extends ViewDataBinding, VM extends BaseViewModel> extends AbsBaseActivity {
     V binding;
     VM viewModel;
+    private int variableId;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -32,13 +33,37 @@ public abstract class BaseActivity<V extends ViewDataBinding, VM extends BaseVie
     }
 
     public void initViewDataBinding() {
-        Type type = getClass().getGenericSuperclass();
-        if (type instanceof ParameterizedType) {
-            Class modelClass = (Class) ((ParameterizedType) type).getActualTypeArguments()[1];
+        variableId = initVariableId();
+        viewModel = initViewModel();
+        if (viewModel == null) {
+            Class modelClass;
+            Type type = getClass().getGenericSuperclass();
+            if (type instanceof ParameterizedType) {
+                modelClass = (Class) ((ParameterizedType) type).getActualTypeArguments()[1];
+            } else {
+                //如果没有指定泛型参数，则默认使用BaseViewModel
+                modelClass = BaseViewModel.class;
+            }
             viewModel = (VM) createViewModel(this, modelClass);
         }
+        binding.setVariable(variableId, viewModel);
     }
 
+    /**
+     * 初始化ViewModel
+     *
+     * @return 继承BaseViewModel的ViewModel
+     */
+    public VM initViewModel() {
+        return null;
+    }
+
+    /**
+     * 初始化ViewModel的id
+     *
+     * @return BR的id
+     */
+    public abstract int initVariableId();
 
     /**
      * 初始化数据

@@ -16,6 +16,11 @@ public class RecyclerViewActivity extends BaseActivity<ActivityRecyclerBinding, 
     ObservableArrayList<UserBean> userBeans = new ObservableArrayList<>();
 
     @Override
+    public int initVariableId() {
+        return BR.viewModel;
+    }
+
+    @Override
     protected void initData() {
         for (int i = 0; i < 10; i++) {
             userBeans.add(new UserBean("pkw" + i, String.valueOf(i)));

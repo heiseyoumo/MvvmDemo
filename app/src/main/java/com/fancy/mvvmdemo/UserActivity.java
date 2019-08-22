@@ -18,6 +18,11 @@ public class UserActivity extends BaseActivity<ActivityUserBinding, UserViewMode
     }
 
     @Override
+    public int initVariableId() {
+        return BR.viewModel;
+    }
+
+    @Override
     protected void initData() {
         viewModel.getUser("name", "gender").observe(this, new Observer<User>() {
             @Override

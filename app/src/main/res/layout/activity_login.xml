@@ -6,12 +6,8 @@
     <data>
 
         <variable
-            name="user"
-            type="com.fancy.mvvmdemo.bean.User" />
-
-        <variable
-            name="url"
-            type="String" />
+            name="viewModel"
+            type="com.fancy.mvvmdemo.viewmodel.LoginViewModel" />
     </data>
 
     <RelativeLayout
@@ -23,7 +19,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="23dp"
-            android:text="@{user.userName}"
+            android:text="@{viewModel.userName}"
             android:textColor="#f00"
             android:textSize="23sp" />
 
@@ -33,16 +29,9 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/userName"
             android:padding="23dp"
-            android:text="@{user.userSex}"
+            android:text="@{viewModel.userPwd}"
             android:textColor="#f00"
             android:textSize="23sp" />
-
-        <ImageView
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_below="@+id/userSex"
-            android:layout_centerHorizontal="true"
-            bind:image="@{url}" />
 
         <LinearLayout
             android:layout_width="match_parent"
