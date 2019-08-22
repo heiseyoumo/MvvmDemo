@@ -6,19 +6,19 @@ import android.support.annotation.NonNull;
 import android.view.View;
 
 import com.fancy.mvvmdemo.BaseViewModel;
-import com.fancy.mvvmdemo.model.AppModel;
+import com.fancy.mvvmdemo.model.AppRepository;
 import com.fancy.mvvmdemo.util.ToastUtil;
 
 /**
  * @author pengkuanwang
  * @date 2019-08-21
  */
-public class LoginViewModel extends BaseViewModel<AppModel> {
+public class LoginViewModel extends BaseViewModel<AppRepository> {
     public ObservableField<String> userName = new ObservableField<>();
     public ObservableField<String> userPwd = new ObservableField<>();
 
-    public LoginViewModel(@NonNull Application application, AppModel appModel) {
-        super(application, appModel);
+    public LoginViewModel(@NonNull Application application, AppRepository appRepository) {
+        super(application, appRepository);
     }
 
     /**

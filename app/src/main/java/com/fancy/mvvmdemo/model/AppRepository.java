@@ -11,19 +11,19 @@ import io.reactivex.Observable;
  * @author pengkuanwang
  * @date 2019-08-22
  */
-public class AppModel extends BaseModel implements HttpDataSource {
+public class AppRepository extends BaseModel implements HttpDataSource {
     private final HttpDataSource mHttpDataSource;
-    private static AppModel INSTANCE;
+    private static AppRepository INSTANCE;
 
-    public AppModel(HttpDataSource mHttpDataSource) {
+    public AppRepository(HttpDataSource mHttpDataSource) {
         this.mHttpDataSource = mHttpDataSource;
     }
 
-    public static AppModel getInstance(HttpDataSource httpDataSource) {
+    public static AppRepository getInstance(HttpDataSource httpDataSource) {
         if (INSTANCE == null) {
-            synchronized (AppModel.class) {
+            synchronized (AppRepository.class) {
                 if (INSTANCE == null) {
-                    INSTANCE = new AppModel(httpDataSource);
+                    INSTANCE = new AppRepository(httpDataSource);
                 }
             }
         }
