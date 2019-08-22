@@ -3,6 +3,9 @@ package com.fancy.mvvmdemo.listener;
 import com.fancy.mvvmdemo.bean.HttpResult;
 import com.fancy.mvvmdemo.bean.UserBean;
 import com.fancy.mvvmdemo.http.ApiService;
+import com.fancy.mvvmdemo.util.Util;
+
+import java.util.HashMap;
 
 import io.reactivex.Observable;
 
@@ -30,7 +33,10 @@ public class HttpDataSourceImpl implements HttpDataSource {
     }
 
     @Override
-    public Observable<HttpResult<UserBean>> login() {
-        return null;
+    public Observable<HttpResult<UserBean>> login(String name, String pwd) {
+        HashMap<String, String> hashMap = new HashMap<>();
+        hashMap.put("userName", "name");
+        hashMap.put("pwd", "pwd");
+        return apiService.login(Util.getRequest(hashMap));
     }
 }

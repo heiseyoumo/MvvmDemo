@@ -43,10 +43,10 @@ public class LoginViewModel extends BaseViewModel<AppModel> {
 
     public void login(String userName, String pwd) {
         ToastUtil.showCustomToast("姓名:" + userName + ",密码:" + pwd);
-        model.login();
+        model.login(userName, pwd);
     }
 
-    public MutableLiveData<UserBean> Login1(Context context, String userName, String pwd) {
+    public MutableLiveData<UserBean> Login(Context context, String userName, String pwd) {
         final MutableLiveData<UserBean> mutableLiveData = new MutableLiveData<>();
         new Thread(new Runnable() {
             @Override

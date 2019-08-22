@@ -31,7 +31,7 @@ public class AppModel extends BaseModel implements HttpDataSource {
     }
 
     @Override
-    public Observable<HttpResult<UserBean>> login() {
-        return mHttpDataSource.login();
+    public Observable<HttpResult<UserBean>> login(String name, String pwd) {
+        return mHttpDataSource.login(name, pwd);
     }
 }

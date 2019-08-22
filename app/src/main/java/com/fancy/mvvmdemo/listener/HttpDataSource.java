@@ -11,5 +11,5 @@ import io.reactivex.Observable;
  */
 public interface HttpDataSource {
     //模拟登录
-    Observable<HttpResult<UserBean>> login();
+    Observable<HttpResult<UserBean>> login(String name,String pwd);
 }
