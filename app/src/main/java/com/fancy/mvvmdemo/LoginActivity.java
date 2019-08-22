@@ -1,6 +1,7 @@
 package com.fancy.mvvmdemo;
 
 import android.arch.lifecycle.ViewModelProviders;
+import android.view.View;
 
 import com.fancy.mvvmdemo.databinding.ActivityLoginBinding;
 import com.fancy.mvvmdemo.viewmodel.LoginViewModel;
@@ -32,5 +33,13 @@ public class LoginActivity extends BaseActivity<ActivityLoginBinding, LoginViewM
 
     @Override
     protected void initData() {
+        binding.btnClick.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String name = viewModel.userName.get();
+                String pwd = viewModel.userPwd.get();
+                viewModel.login(name, pwd);
+            }
+        });
     }
 }
