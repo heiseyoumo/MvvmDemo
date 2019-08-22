@@ -42,6 +42,12 @@ public class BaseViewModel<M extends BaseModel> extends AndroidViewModel {
         uiChangeLiveData.finishEvent.call();
     }
 
+    @Override
+    protected void onCleared() {
+        System.out.println("结束啦");
+        super.onCleared();
+    }
+
     public final class UiChangeLiveData extends SingleLiveEvent {
         private SingleLiveEvent<String> showDialogEvent;
         private SingleLiveEvent<Void> dismissDialogEvent;
