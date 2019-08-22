@@ -45,4 +45,27 @@ public class AppManager {
             activityStack.remove(activity);
         }
     }
+
+    /**
+     * 结束所有Activity
+     */
+    public void finishAllActivity() {
+        for (int i = 0, size = activityStack.size(); i < size; i++) {
+            if (null != activityStack.get(i)) {
+                finishActivity(activityStack.get(i));
+            }
+        }
+        activityStack.clear();
+    }
+
+    /**
+     * 结束指定的Activity
+     */
+    public void finishActivity(Activity activity) {
+        if (activity != null) {
+            if (!activity.isFinishing()) {
+                activity.finish();
+            }
+        }
+    }
 }
