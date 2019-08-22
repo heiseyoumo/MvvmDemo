@@ -33,15 +33,6 @@ public class LoginActivity extends BaseActivity<ActivityLoginBinding, LoginViewM
 
     @Override
     protected void initData() {
-        binding.btnClick.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String name = viewModel.userName.get();
-                String pwd = viewModel.userPwd.get();
-                viewModel.login(name, pwd);
-            }
-        });
-
         binding.btnRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

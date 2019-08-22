@@ -24,16 +24,25 @@ public class LoginViewModel extends BaseViewModel<AppRepository> {
 
     public LoginViewModel(@NonNull Application application, AppRepository appRepository) {
         super(application, appRepository);
+        /**
+         * 初始化输入框内容
+         */
+        userName.set("彭宽旺");
+        userPwd.set("000000");
     }
 
     /**
      * 登录按钮点击事件
      */
-    public void loginOnClickCommand(View view) {
-        String name = userName.get();
-        String pwd = userPwd.get();
-        login(name, pwd);
-    }
+    public View.OnClickListener loginOnClickCommand = new View.OnClickListener() {
+
+        @Override
+        public void onClick(View v) {
+            String name = userName.get();
+            String pwd = userPwd.get();
+            login(name, pwd);
+        }
+    };
 
     /**
      * 登录
