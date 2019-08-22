@@ -6,8 +6,12 @@ import android.support.annotation.NonNull;
 import android.view.View;
 
 import com.fancy.mvvmdemo.BaseViewModel;
+import com.fancy.mvvmdemo.bean.HttpResult;
+import com.fancy.mvvmdemo.bean.UserBean;
 import com.fancy.mvvmdemo.model.AppRepository;
 import com.fancy.mvvmdemo.util.ToastUtil;
+
+import io.reactivex.Observable;
 
 /**
  * @author pengkuanwang
@@ -32,6 +36,6 @@ public class LoginViewModel extends BaseViewModel<AppRepository> {
 
     public void login(String userName, String pwd) {
         ToastUtil.showCustomToast("姓名:" + userName + ",密码:" + pwd);
-        model.login(userName, pwd);
+        Observable<HttpResult<UserBean>> login = model.login(userName, pwd);
     }
 }

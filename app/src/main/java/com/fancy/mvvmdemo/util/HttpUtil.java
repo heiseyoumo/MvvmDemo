@@ -1,6 +1,6 @@
 package com.fancy.mvvmdemo.util;
 
-import com.fancy.mvvmdemo.http.ProgressSubscriber;
+import com.fancy.mvvmdemo.http.ProgressObserver;
 import com.fancy.mvvmdemo.http.RxHelper;
 
 import io.reactivex.Observable;
@@ -33,7 +33,7 @@ public class HttpUtil {
         return SingletonHolder.INSTANCE;
     }
 
-    public void toSubscribe(Observable ob, final ProgressSubscriber subscriber) {
+    public void toSubscribe(Observable ob, final ProgressObserver subscriber) {
         ObservableTransformer transformer = RxHelper.handleResult();
         ob.compose(transformer)
                 .doOnSubscribe(new Consumer<Disposable>() {

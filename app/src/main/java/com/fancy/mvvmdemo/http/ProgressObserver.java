@@ -13,16 +13,21 @@ import io.reactivex.disposables.Disposable;
  * 此类含有加载框的显示和消失
  */
 
-public abstract class ProgressSubscriber<T> implements Observer<T> {
+public abstract class ProgressObserver<T> implements Observer<T> {
 
     LoadDialog loadDialog;
     private Context context;
 
-    public ProgressSubscriber(Context context) {
+    public ProgressObserver(Context context) {
         this(context, true);
     }
 
-    public ProgressSubscriber(Context context, boolean isShowDialog) {
+    /**
+     *
+     * @param context
+     * @param isShowDialog
+     */
+    public ProgressObserver(Context context, boolean isShowDialog) {
         this.context = context;
         //初始化一个dialog
         if (isShowDialog) {
