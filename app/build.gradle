@@ -1,23 +1,45 @@
 apply plugin: 'com.android.application'
 
+def formatHost(String host) {
+    return new StringBuffer().append("\"").append(host).append("\"").toString();
+}
+
 android {
-    compileSdkVersion 28
+    compileSdkVersion rootProject.ext.android.compileSdkVersion
     defaultConfig {
-        applicationId "com.fancy.mvvmdemo"
-        minSdkVersion 21
-        targetSdkVersion 28
-        versionCode 1
-        versionName "1.0"
+        applicationId rootProject.ext.android.applicationId
+        minSdkVersion rootProject.ext.android.minSdkVersion
+        targetSdkVersion rootProject.ext.android.targetSdkVersion
+        versionCode rootProject.ext.android.versionCode
+        versionName rootProject.ext.android.versionName
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+        buildConfigField "String", "APP_HOST_DEBUG", formatHost(rootProject.ext.test_environment.appHost)
+        buildConfigField "String", "APP_HOST_RELEASE", formatHost(rootProject.ext.produce_environment.appHost)
+    }
+    signingConfigs {
+        debug {
+        }
+        release {
+            storeFile file('huifu.jks')
+            storePassword "android"
+            keyAlias "androidkey"
+            keyPassword "android"
+        }
     }
     buildTypes {
         release {
             minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
+        }
+        preRelease {
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
         }
         debug {
             minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
     dataBinding {
