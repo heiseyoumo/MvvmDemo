@@ -4,7 +4,6 @@ import android.app.Application;
 import android.databinding.ObservableField;
 import android.os.Handler;
 import android.support.annotation.NonNull;
-import android.view.View;
 
 import com.fancy.mvvmdemo.BaseViewModel;
 import com.fancy.mvvmdemo.bean.HttpResult;
@@ -35,24 +34,25 @@ public class LoginViewModel extends BaseViewModel<AppRepository> {
     }
 
     /**
-     * 登录按钮点击事件
+     * 注册按钮的点击事件
      */
-    public View.OnClickListener loginOnClickCommand = new View.OnClickListener() {
-
+    public BindingCommand loginOnClickCommand = new BindingCommand(new BindingAction() {
         @Override
-        public void onClick(View v) {
+        public void call() {
             String name = userName.get();
             String pwd = userPwd.get();
             login(name, pwd);
         }
-    };
+    });
     /**
      * 注册按钮的点击事件
      */
     public BindingCommand registerOnClickCommand = new BindingCommand(new BindingAction() {
         @Override
         public void call() {
-
+            String name = userName.get();
+            String pwd = userPwd.get();
+            register(name, pwd);
         }
     });
 

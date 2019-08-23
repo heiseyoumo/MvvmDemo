@@ -13,6 +13,7 @@ ext {
             "lifecycle-compiler"    : "android.arch.lifecycle:compiler:1.1.1",
             "rxlifecycle"           : "com.trello.rxlifecycle2:rxlifecycle:2.2.2",
             "rxlifecycle-components": "com.trello.rxlifecycle2:rxlifecycle-components:2.2.2",
+            "rxbinding"             : "com.jakewharton.rxbinding2:rxbinding:2.1.1",
     ]
     //测试环境
     test_environment = [

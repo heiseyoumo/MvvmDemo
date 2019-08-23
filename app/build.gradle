@@ -68,7 +68,9 @@ dependencies {
     api(rootProject.ext.dependencies.rxlifecycle) {
         exclude group: 'com.android.support'
     }
-
+    api(rootProject.ext.dependencies.rxbinding) {
+        exclude group: 'com.android.support'
+    }
     implementation 'com.github.bumptech.glide:glide:4.9.0'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.9.0'
 
