@@ -10,7 +10,9 @@ ext {
             versionName      : "1.0",
     ]
     dependencies = [
-            "lifecycle-compiler": "android.arch.lifecycle:compiler:1.1.1",
+            "lifecycle-compiler"    : "android.arch.lifecycle:compiler:1.1.1",
+            "rxlifecycle"           : "com.trello.rxlifecycle2:rxlifecycle:2.2.2",
+            "rxlifecycle-components": "com.trello.rxlifecycle2:rxlifecycle-components:2.2.2",
     ]
     //测试环境
     test_environment = [
