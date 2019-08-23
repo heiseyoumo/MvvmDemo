@@ -73,8 +73,8 @@ public class BaseViewModel<M extends BaseModel> extends AndroidViewModel impleme
     }
 
     @Override
-    public void onCreate() {
-        System.out.println("onCreate");
+    public void onCreate(LifecycleOwner owner) {
+        System.out.println(owner);
     }
 
     @Override
