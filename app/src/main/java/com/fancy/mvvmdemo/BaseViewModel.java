@@ -12,6 +12,7 @@ import com.fancy.mvvmdemo.http.ApiException;
 import com.fancy.mvvmdemo.http.RxHelper;
 import com.fancy.mvvmdemo.listener.CallBack;
 import com.fancy.mvvmdemo.util.CommonUtil;
+import com.fancy.mvvmdemo.util.ToastUtil;
 import com.trello.rxlifecycle2.LifecycleProvider;
 
 import java.lang.ref.WeakReference;
@@ -156,13 +157,17 @@ public class BaseViewModel<M extends BaseModel> extends AndroidViewModel impleme
     }
 
     /**
-     * 发起网络请求
+     * 发起网络请求,返回的结果通过callback回调给调用处
      *
      * @param observable
      * @param callBack
      * @param <T>
      */
     public <T> void getHttpRequest(Observable<HttpResult<T>> observable, final CallBack<T> callBack) {
+        if (!CommonUtil.isNetworkAvailable(MyApplication.getInstance())) {
+            ToastUtil.showCustomToast("网络无效");
+            return;
+        }
         ObservableTransformer transformer = RxHelper.handleResult();
         observable.compose(transformer)
                 .compose(getLifecycleProvider().bindToLifecycle())
@@ -187,11 +192,7 @@ public class BaseViewModel<M extends BaseModel> extends AndroidViewModel impleme
             @Override
             public void onError(Throwable e) {
                 e.printStackTrace();
-                if (!CommonUtil.isNetworkAvailable(MyApplication.getInstance())) {
-                    if (callBack != null) {
-                        callBack.onFail("-1", "网络无效");
-                    }
-                } else if (e instanceof ApiException) {
+                if (e instanceof ApiException) {
                     if (callBack != null) {
                         callBack.onFail(((ApiException) e).getCode(), e.getMessage());
                     }
