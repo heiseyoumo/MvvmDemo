@@ -6,10 +6,22 @@ import android.arch.lifecycle.Lifecycle;
 import android.arch.lifecycle.LifecycleOwner;
 import android.support.annotation.NonNull;
 
+import com.fancy.mvvmdemo.bean.HttpResult;
 import com.fancy.mvvmdemo.event.SingleLiveEvent;
+import com.fancy.mvvmdemo.http.ApiException;
+import com.fancy.mvvmdemo.http.RxHelper;
+import com.fancy.mvvmdemo.listener.CallBack;
+import com.fancy.mvvmdemo.util.CommonUtil;
 import com.trello.rxlifecycle2.LifecycleProvider;
 
 import java.lang.ref.WeakReference;
+
+import io.reactivex.Observable;
+import io.reactivex.ObservableTransformer;
+import io.reactivex.Observer;
+import io.reactivex.disposables.CompositeDisposable;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.functions.Consumer;
 
 /**
  * @author pengkuanwang
@@ -19,10 +31,22 @@ public class BaseViewModel<M extends BaseModel> extends AndroidViewModel impleme
     protected M model;
     UiChangeLiveData uiChangeLiveData;
     private WeakReference<LifecycleProvider> lifecycle;
+    /**
+     * 管理RxJava，主要针对RxJava异步操作造成的内存泄漏
+     */
+    private CompositeDisposable mCompositeDisposable;
 
     public BaseViewModel(@NonNull Application application, M model) {
         super(application);
         this.model = model;
+        mCompositeDisposable = new CompositeDisposable();
+    }
+
+    protected void addSubscribe(Disposable disposable) {
+        if (mCompositeDisposable == null) {
+            mCompositeDisposable = new CompositeDisposable();
+        }
+        mCompositeDisposable.add(disposable);
     }
 
     /**
@@ -125,5 +149,60 @@ public class BaseViewModel<M extends BaseModel> extends AndroidViewModel impleme
             }
             return liveData;
         }
+    }
+
+    /**
+     * 发起网络请求
+     *
+     * @param observable
+     * @param callBack
+     * @param <T>
+     */
+    public <T> void getHttpRequest(Observable<HttpResult<T>> observable, final CallBack<T> callBack) {
+        ObservableTransformer transformer = RxHelper.handleResult();
+        observable.compose(transformer)
+                .compose(getLifecycleProvider().bindToLifecycle())
+                .doOnSubscribe(new Consumer<Disposable>() {
+                    @Override
+                    public void accept(Disposable disposable) throws Exception {
+                        showDialog();
+                    }
+                }).subscribe(new Observer<T>() {
+            @Override
+            public void onSubscribe(Disposable d) {
+                addSubscribe(d);
+            }
+
+            @Override
+            public void onNext(T t) {
+                if (callBack != null) {
+                    callBack.onSuccess(t);
+                }
+            }
+
+            @Override
+            public void onError(Throwable e) {
+                e.printStackTrace();
+                if (!CommonUtil.isNetworkAvailable(MyApplication.getInstance())) {
+                    if (callBack != null) {
+                        callBack.onFail("-1", "网络无效");
+                    }
+                } else if (e instanceof ApiException) {
+                    if (callBack != null) {
+                        callBack.onFail(((ApiException) e).getCode(), e.getMessage());
+                    }
+                } else {
+                    if (callBack != null) {
+                        callBack.onFail("-1", "网络异常，请稍后再试");
+                    }
+                }
+                dismissDialog();
+            }
+
+            @Override
+            public void onComplete() {
+                dismissDialog();
+            }
+        });
     }
 }

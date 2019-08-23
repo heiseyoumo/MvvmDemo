@@ -23,7 +23,6 @@ public abstract class ProgressObserver<T> implements Observer<T> {
     }
 
     /**
-     *
      * @param context
      * @param isShowDialog
      */
@@ -45,7 +44,7 @@ public abstract class ProgressObserver<T> implements Observer<T> {
         if (e instanceof ApiException) {
             String message = e.getMessage();
             String code = ((ApiException) e).getCode();
-            _onError(code,message);
+            _onError(code, message);
         }
     }
 
@@ -56,7 +55,7 @@ public abstract class ProgressObserver<T> implements Observer<T> {
 
     @Override
     public void onComplete() {
-
+        dismissProgressDialog();
     }
 
     protected abstract void _onNext(T t);

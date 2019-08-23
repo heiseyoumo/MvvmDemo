@@ -9,6 +9,7 @@ import android.view.View;
 import com.fancy.mvvmdemo.BaseViewModel;
 import com.fancy.mvvmdemo.bean.HttpResult;
 import com.fancy.mvvmdemo.bean.UserBean;
+import com.fancy.mvvmdemo.listener.CallBack;
 import com.fancy.mvvmdemo.model.AppRepository;
 import com.fancy.mvvmdemo.util.ToastUtil;
 import com.fancy.mvvmdemo.view.BindingAction;
@@ -51,7 +52,7 @@ public class LoginViewModel extends BaseViewModel<AppRepository> {
     public BindingCommand registerOnClickCommand = new BindingCommand(new BindingAction() {
         @Override
         public void call() {
-            ToastUtil.showCustomToast("点击注册按钮");
+
         }
     });
 
@@ -61,9 +62,19 @@ public class LoginViewModel extends BaseViewModel<AppRepository> {
      * @param userName
      * @param pwd
      */
-    public void login(String userName, String pwd) {
-        ToastUtil.showCustomToast("姓名:" + userName + ",密码:" + pwd);
+    public void login(final String userName, String pwd) {
         Observable<HttpResult<UserBean>> login = model.login(userName, pwd);
+        getHttpRequest(login, new CallBack<UserBean>() {
+            @Override
+            public void onSuccess(UserBean data) {
+
+            }
+
+            @Override
+            public void onFail(String code, String errorMsg) {
+                ToastUtil.showCustomToast(errorMsg);
+            }
+        });
     }
 
     /**
@@ -74,7 +85,18 @@ public class LoginViewModel extends BaseViewModel<AppRepository> {
      */
     public void register(String phone, String code) {
         ToastUtil.showCustomToast("姓名:" + userName + ",密码:" + phone);
-        Observable<HttpResult<UserBean>> login = model.register(phone, code);
+        Observable<HttpResult<UserBean>> register = model.register(phone, code);
+        getHttpRequest(register, new CallBack<UserBean>() {
+            @Override
+            public void onSuccess(UserBean data) {
+
+            }
+
+            @Override
+            public void onFail(String code, String errorMsg) {
+                ToastUtil.showCustomToast(errorMsg);
+            }
+        });
     }
 
     public void show() {

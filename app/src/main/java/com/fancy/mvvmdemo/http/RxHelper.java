@@ -1,6 +1,8 @@
 package com.fancy.mvvmdemo.http;
 
 import com.fancy.mvvmdemo.bean.HttpResult;
+import com.trello.rxlifecycle2.LifecycleProvider;
+import com.trello.rxlifecycle2.LifecycleTransformer;
 
 import io.reactivex.Observable;
 import io.reactivex.ObservableEmitter;
@@ -16,6 +18,15 @@ import io.reactivex.schedulers.Schedulers;
  * @date 2019-08-19
  */
 public class RxHelper {
+
+    /**
+     * 生命周期绑定
+     *
+     * @param lifecycle Fragment
+     */
+    public static LifecycleTransformer bindToLifecycle(LifecycleProvider lifecycle) {
+        return lifecycle.bindToLifecycle();
+    }
 
     public static <T> ObservableTransformer<HttpResult<T>, T> handleResult1() {
         ObservableTransformer transformer = new ObservableTransformer<HttpResult<T>, T>() {
