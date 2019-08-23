@@ -67,7 +67,7 @@ public abstract class ProgressObserver<T> implements Observer<T> {
      */
     private void dismissProgressDialog() {
         if (loadDialog != null) {
-            loadDialog.dismissLoading();
+            loadDialog.dismiss();
         }
     }
 
@@ -76,7 +76,7 @@ public abstract class ProgressObserver<T> implements Observer<T> {
      */
     public void showProgressDialog() {
         if (loadDialog != null) {
-            loadDialog.showLoading();
+            loadDialog.show();
         }
     }
 }

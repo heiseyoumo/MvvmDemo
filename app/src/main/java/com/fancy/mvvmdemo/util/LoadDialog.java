@@ -6,27 +6,13 @@ import android.support.annotation.StyleRes;
 
 import com.fancy.mvvmdemo.R;
 
-
 /**
- * Created by pengkuanwang on 2017/8/2.
+ * @author pengkuanwang
+ * @date 2019-08-20
  */
-
 public class LoadDialog extends AlertDialog {
     public LoadDialog(Context context, @StyleRes int themeResId) {
         super(context, themeResId);
-    }
-
-    public void dismissLoading() {
-        dismiss();
-    }
-
-    public void showLoading() {
-        show();
-    }
-
-    @Override
-    public void show() {
-        super.show();
         setContentView(R.layout.load_view);
         setCanceledOnTouchOutside(false);
         setCancelable(false);

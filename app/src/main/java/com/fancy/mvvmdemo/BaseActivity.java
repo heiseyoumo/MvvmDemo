@@ -131,12 +131,8 @@ public abstract class BaseActivity<V extends ViewDataBinding, VM extends BaseVie
     }
 
     private void showDialog() {
-        if (loadDialog != null) {
-            loadDialog.show();
-        } else {
-            loadDialog = new LoadDialog(this, R.style.LoadingDialogTheme);
-            loadDialog.show();
-        }
+        loadDialog = new LoadDialog(this, R.style.LoadingDialogTheme);
+        loadDialog.show();
     }
 
     public void dismissDialog() {
