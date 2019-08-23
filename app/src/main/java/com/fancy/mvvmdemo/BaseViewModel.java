@@ -87,8 +87,13 @@ public class BaseViewModel<M extends BaseModel> extends AndroidViewModel impleme
 
     @Override
     protected void onCleared() {
-        System.out.println("结束啦");
         super.onCleared();
+        /**
+         * ViewModel销毁时会执行，同时取消所有异步任务
+         */
+        if (mCompositeDisposable != null) {
+            mCompositeDisposable.clear();
+        }
     }
 
     @Override
