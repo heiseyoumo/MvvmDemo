@@ -89,6 +89,10 @@ public abstract class BaseActivity<V extends ViewDataBinding, VM extends BaseVie
             viewModel = (VM) createViewModel(this, modelClass);
         }
         binding.setVariable(variableId, viewModel);
+        /**
+         * 通过此方法可以讲BaseViewModel的生命周期跟Activity
+         * 的生命周期相互绑定
+         */
         getLifecycle().addObserver(viewModel);
         //注入RxLifecycle生命周期
         viewModel.injectLifecycleProvider(this);

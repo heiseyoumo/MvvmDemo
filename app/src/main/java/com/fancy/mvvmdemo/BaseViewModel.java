@@ -102,16 +102,6 @@ public class BaseViewModel<M extends BaseModel> extends AndroidViewModel impleme
         System.out.println("onPause");
     }
 
-    @Override
-    public void registerRxBus() {
-
-    }
-
-    @Override
-    public void removeRxBus() {
-
-    }
-
     public final class UiChangeLiveData extends SingleLiveEvent {
         private SingleLiveEvent<String> showDialogEvent;
         private SingleLiveEvent<Void> dismissDialogEvent;

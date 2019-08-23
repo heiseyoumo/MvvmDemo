@@ -30,14 +30,4 @@ public interface IBaseViewModel extends LifecycleObserver {
 
     @OnLifecycleEvent(Lifecycle.Event.ON_PAUSE)
     void onPause();
-
-    /**
-     * 注册RxBus
-     */
-    void registerRxBus();
-
-    /**
-     * 移除RxBus
-     */
-    void removeRxBus();
 }
