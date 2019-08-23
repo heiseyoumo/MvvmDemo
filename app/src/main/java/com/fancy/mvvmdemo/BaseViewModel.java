@@ -39,7 +39,6 @@ public class BaseViewModel<M extends BaseModel> extends AndroidViewModel impleme
     public BaseViewModel(@NonNull Application application, M model) {
         super(application);
         this.model = model;
-        mCompositeDisposable = new CompositeDisposable();
     }
 
     protected void addSubscribe(Disposable disposable) {
