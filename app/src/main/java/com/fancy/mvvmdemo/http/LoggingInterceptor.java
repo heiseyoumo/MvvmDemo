@@ -1,6 +1,5 @@
 package com.fancy.mvvmdemo.http;
 
-
 import android.util.Log;
 
 import java.io.IOException;
@@ -17,9 +16,9 @@ import okio.Buffer;
 import okio.BufferedSource;
 
 /**
- * Created by IT on 2017/7/21.
+ * @author pengkuanwang
+ * @date 2019-08-19
  */
-
 public class LoggingInterceptor implements Interceptor {
     private static final Charset UTF8 = Charset.forName("UTF-8");
     private static final String TAG = "net_LoggingInterceptor";

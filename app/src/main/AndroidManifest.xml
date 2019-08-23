@@ -27,11 +27,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Demo1Activity" />
-        <activity android:name=".UserActivity" />
-        <activity android:name=".DemoActivity" />
         <activity android:name=".LoginActivity" />
-        <activity android:name=".PersonActivity" />
         <activity android:name=".RecyclerViewActivity" />
     </application>
 </manifest>

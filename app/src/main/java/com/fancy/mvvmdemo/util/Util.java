@@ -7,11 +7,10 @@ import java.util.HashMap;
 
 import okhttp3.MediaType;
 import okhttp3.RequestBody;
-
 /**
- * Created by wanglijuan on 2017/6/23.
+ * @author pengkuanwang
+ * @date 2018/1/15
  */
-
 public class Util {
     private static void getCommonParamsAndSign(HashMap<String, String> map) {
         map.put("appId", "app");

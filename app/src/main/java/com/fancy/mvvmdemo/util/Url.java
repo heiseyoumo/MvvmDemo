@@ -1,9 +1,8 @@
 package com.fancy.mvvmdemo.util;
-
 /**
- * @author helin
- * create by 2018-05-17
+ * @author pengkuanwang
+ * @date 2018/1/15
  */
 public class Url {
-    public static final String BASE_URL = "https://test2222-m-stg.ppppoints.com/";
+    public static final String BASE_URL = "https://test-m-stg.ppppoints.com/";
 }

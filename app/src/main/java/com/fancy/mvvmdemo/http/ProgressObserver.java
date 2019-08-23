@@ -9,10 +9,9 @@ import io.reactivex.Observer;
 import io.reactivex.disposables.Disposable;
 
 /**
- * Created by wanglijuan on 17/6/6.
- * 此类含有加载框的显示和消失
+ * @author pengkuanwang
+ * @date 2019-08-19
  */
-
 public abstract class ProgressObserver<T> implements Observer<T> {
 
     LoadDialog loadDialog;
