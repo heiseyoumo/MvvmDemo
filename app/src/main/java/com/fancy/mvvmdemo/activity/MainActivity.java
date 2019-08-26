@@ -1,11 +1,11 @@
-package com.fancy.mvvmdemo;
+package com.fancy.mvvmdemo.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
-import com.fancy.mvvmdemo.activity.LoginActivity;
+import com.fancy.mvvmdemo.R;
 
 public class MainActivity extends AppCompatActivity {
     @Override

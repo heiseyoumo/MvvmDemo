@@ -1,6 +1,7 @@
 package com.fancy.mvvmdemo.viewmodel;
 
 import android.app.Application;
+import android.view.View;
 
 import com.fancy.mvvmdemo.BaseViewModel;
 import com.fancy.mvvmdemo.bean.HttpResult;
@@ -19,6 +20,14 @@ public class RegisterViewModel extends BaseViewModel<AppRepository> {
     public RegisterViewModel(Application application, AppRepository model) {
         super(application, model);
     }
+
+    public View.OnClickListener onClickRegister = new View.OnClickListener() {
+
+        @Override
+        public void onClick(View v) {
+            register("15316161570", "1234");
+        }
+    };
 
     /**
      * 注册
