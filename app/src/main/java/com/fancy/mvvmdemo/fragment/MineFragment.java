@@ -11,6 +11,11 @@ import com.fancy.mvvmdemo.databinding.FragmentMineBinding;
  */
 public class MineFragment extends BaseFragment<FragmentMineBinding, BaseViewModel>  {
     @Override
+    protected void initData() {
+
+    }
+
+    @Override
     public int initContentView() {
         return R.layout.fragment_mine;
     }

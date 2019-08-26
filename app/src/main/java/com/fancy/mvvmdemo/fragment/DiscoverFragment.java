@@ -11,6 +11,11 @@ import com.fancy.mvvmdemo.databinding.FragmentDiscoverBinding;
  */
 public class DiscoverFragment extends BaseFragment<FragmentDiscoverBinding, BaseViewModel> {
     @Override
+    protected void initData() {
+
+    }
+
+    @Override
     public int initContentView() {
         return R.layout.fragment_discover;
     }

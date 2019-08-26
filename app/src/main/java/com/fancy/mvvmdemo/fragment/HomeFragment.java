@@ -11,6 +11,11 @@ import com.fancy.mvvmdemo.databinding.FragmentHomeBinding;
  */
 public class HomeFragment extends BaseFragment<FragmentHomeBinding, BaseViewModel> {
     @Override
+    protected void initData() {
+
+    }
+
+    @Override
     public int initContentView() {
         return R.layout.fragment_home;
     }

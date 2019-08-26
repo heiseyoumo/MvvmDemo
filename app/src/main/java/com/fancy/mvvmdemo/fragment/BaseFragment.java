@@ -39,6 +39,7 @@ public abstract class BaseFragment<V extends ViewDataBinding, VM extends BaseVie
          * 私有的初始化DataBinding和ViewModel方法
          */
         initViewDataBinding();
+        initData();
     }
 
     /**
@@ -64,6 +65,11 @@ public abstract class BaseFragment<V extends ViewDataBinding, VM extends BaseVie
         //注入RxLifecycle生命周期
         viewModel.injectLifecycleProvider(this);
     }
+
+    /**
+     * 初始化数据
+     */
+    protected abstract void initData();
 
     /**
      * 初始化根布局

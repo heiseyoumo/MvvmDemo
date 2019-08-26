@@ -11,6 +11,11 @@ import com.fancy.mvvmdemo.databinding.FragmentDataBinding;
  */
 public class DataFragment extends BaseFragment<FragmentDataBinding, BaseViewModel> {
     @Override
+    protected void initData() {
+
+    }
+
+    @Override
     public int initContentView() {
         return R.layout.fragment_data;
     }
