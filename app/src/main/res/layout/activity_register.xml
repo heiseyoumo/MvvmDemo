@@ -17,6 +17,7 @@
         <com.fancy.mvvmdemo.view.TitleBarLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            app:titleBar_right_title="右边文案"
             app:titleBar_title="注册" />
 
         <TextView
