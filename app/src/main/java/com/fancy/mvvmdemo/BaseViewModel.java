@@ -12,6 +12,7 @@ import com.fancy.mvvmdemo.event.SingleLiveEvent;
 import com.fancy.mvvmdemo.http.ApiException;
 import com.fancy.mvvmdemo.http.RxHelper;
 import com.fancy.mvvmdemo.listener.CallBack;
+import com.fancy.mvvmdemo.model.BaseModel;
 import com.fancy.mvvmdemo.util.CommonUtil;
 import com.fancy.mvvmdemo.util.ToastUtil;
 import com.trello.rxlifecycle2.LifecycleProvider;
@@ -115,6 +116,9 @@ public class BaseViewModel<M extends BaseModel> extends AndroidViewModel impleme
     @Override
     protected void onCleared() {
         super.onCleared();
+        if (model != null) {
+            model.onCleared();
+        }
         /**
          * ViewModel销毁时会执行，同时取消所有异步任务
          */

@@ -1,6 +1,5 @@
 package com.fancy.mvvmdemo.model;
 
-import com.fancy.mvvmdemo.BaseModel;
 import com.fancy.mvvmdemo.bean.HttpResult;
 import com.fancy.mvvmdemo.bean.UserBean;
 import com.fancy.mvvmdemo.listener.HttpDataSource;
