@@ -7,6 +7,7 @@ import android.support.annotation.NonNull;
 
 import com.fancy.mvvmdemo.model.AppRepository;
 import com.fancy.mvvmdemo.viewmodel.LoginViewModel;
+import com.fancy.mvvmdemo.viewmodel.RegisterViewModel;
 
 /**
  * @author pengkuanwang
@@ -38,6 +39,8 @@ public class AppViewModelFactory extends ViewModelProvider.NewInstanceFactory {
     public <T extends ViewModel> T create(@NonNull Class<T> modelClass) {
         if (modelClass.isAssignableFrom(LoginViewModel.class)) {
             return (T) new LoginViewModel(mApplication, appRepository);
+        } else if (modelClass.isAssignableFrom(RegisterViewModel.class)) {
+            return (T) new RegisterViewModel(mApplication, appRepository);
         }
         throw new IllegalArgumentException("Unknown ViewModel class: " + modelClass.getName());
     }

@@ -3,6 +3,7 @@ package com.fancy.mvvmdemo;
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModel;
 import android.arch.lifecycle.ViewModelProviders;
+import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.databinding.ViewDataBinding;
 import android.os.Bundle;
@@ -13,14 +14,15 @@ import com.fancy.mvvmdemo.util.LoadDialog;
 
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
+import java.util.Map;
 
 /**
  * @author pengkuanwang
  * @date 2019-08-20
  */
 public abstract class BaseActivity<V extends ViewDataBinding, VM extends BaseViewModel> extends AbsBaseActivity {
-    V binding;
-    VM viewModel;
+    protected V binding;
+    protected VM viewModel;
     private int variableId;
     private LoadDialog loadDialog;
 
@@ -65,6 +67,15 @@ public abstract class BaseActivity<V extends ViewDataBinding, VM extends BaseVie
             @Override
             public void onChanged(@Nullable Void v) {
                 finish();
+            }
+        });
+        //跳入新页面
+        viewModel.getUiChangeLiveData().getStartActivityEvent().observe(this, new Observer<Map<String, Object>>() {
+            @Override
+            public void onChanged(@Nullable Map<String, Object> params) {
+                Class<?> clz = (Class<?>) params.get(BaseViewModel.ParameterField.CLASS);
+                Bundle bundle = (Bundle) params.get(BaseViewModel.ParameterField.BUNDLE);
+                startActivity(clz, bundle);
             }
         });
     }
@@ -139,6 +150,29 @@ public abstract class BaseActivity<V extends ViewDataBinding, VM extends BaseVie
         if (loadDialog != null && loadDialog.isShowing()) {
             loadDialog.dismiss();
         }
+    }
+
+    /**
+     * 跳转页面
+     *
+     * @param clz 所跳转的目的Activity类
+     */
+    public void startActivity(Class<?> clz) {
+        startActivity(new Intent(this, clz));
+    }
+
+    /**
+     * 跳转页面
+     *
+     * @param clz    所跳转的目的Activity类
+     * @param bundle 跳转所携带的信息
+     */
+    public void startActivity(Class<?> clz, Bundle bundle) {
+        Intent intent = new Intent(this, clz);
+        if (bundle != null) {
+            intent.putExtra("bundle", bundle);
+        }
+        startActivity(intent);
     }
 
     @Override

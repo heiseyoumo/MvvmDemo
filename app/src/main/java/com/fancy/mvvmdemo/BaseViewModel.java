@@ -4,6 +4,7 @@ import android.app.Application;
 import android.arch.lifecycle.AndroidViewModel;
 import android.arch.lifecycle.Lifecycle;
 import android.arch.lifecycle.LifecycleOwner;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 
 import com.fancy.mvvmdemo.bean.HttpResult;
@@ -16,6 +17,8 @@ import com.fancy.mvvmdemo.util.ToastUtil;
 import com.trello.rxlifecycle2.LifecycleProvider;
 
 import java.lang.ref.WeakReference;
+import java.util.HashMap;
+import java.util.Map;
 
 import io.reactivex.Observable;
 import io.reactivex.ObservableTransformer;
@@ -81,6 +84,30 @@ public class BaseViewModel<M extends BaseModel> extends AndroidViewModel impleme
         uiChangeLiveData.dismissDialogEvent.call();
     }
 
+    /**
+     * 跳转页面
+     *
+     * @param clz 所跳转的目的Activity类
+     */
+    public void startActivity(Class<?> clz) {
+        startActivity(clz, null);
+    }
+
+    /**
+     * 跳转页面
+     *
+     * @param clz    所跳转的目的Activity类
+     * @param bundle 跳转所携带的信息
+     */
+    public void startActivity(Class<?> clz, Bundle bundle) {
+        Map<String, Object> params = new HashMap<>();
+        params.put(ParameterField.CLASS, clz);
+        if (bundle != null) {
+            params.put(ParameterField.BUNDLE, bundle);
+        }
+        uiChangeLiveData.startActivityEvent.postValue(params);
+    }
+
     public void finish() {
         uiChangeLiveData.finishEvent.call();
     }
@@ -136,6 +163,8 @@ public class BaseViewModel<M extends BaseModel> extends AndroidViewModel impleme
         private SingleLiveEvent<Void> dismissDialogEvent;
         private SingleLiveEvent<Void> finishEvent;
 
+        private SingleLiveEvent<Map<String, Object>> startActivityEvent;
+
         public SingleLiveEvent<String> getShowDialogEvent() {
             return showDialogEvent = createLiveData(showDialogEvent);
         }
@@ -146,6 +175,10 @@ public class BaseViewModel<M extends BaseModel> extends AndroidViewModel impleme
 
         public SingleLiveEvent<Void> getFinishEvent() {
             return finishEvent = createLiveData(finishEvent);
+        }
+
+        public SingleLiveEvent<Map<String, Object>> getStartActivityEvent() {
+            return startActivityEvent = createLiveData(startActivityEvent);
         }
 
         private SingleLiveEvent createLiveData(SingleLiveEvent liveData) {
@@ -209,5 +242,11 @@ public class BaseViewModel<M extends BaseModel> extends AndroidViewModel impleme
                 dismissDialog();
             }
         });
+    }
+
+    public static final class ParameterField {
+        public static String CLASS = "CLASS";
+        public static String CANONICAL_NAME = "CANONICAL_NAME";
+        public static String BUNDLE = "BUNDLE";
     }
 }

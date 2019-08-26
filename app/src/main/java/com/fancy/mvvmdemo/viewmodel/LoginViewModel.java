@@ -2,10 +2,11 @@ package com.fancy.mvvmdemo.viewmodel;
 
 import android.app.Application;
 import android.databinding.ObservableField;
-import android.os.Handler;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 
 import com.fancy.mvvmdemo.BaseViewModel;
+import com.fancy.mvvmdemo.activity.RegisterActivity;
 import com.fancy.mvvmdemo.bean.HttpResult;
 import com.fancy.mvvmdemo.bean.UserBean;
 import com.fancy.mvvmdemo.listener.CallBack;
@@ -50,9 +51,10 @@ public class LoginViewModel extends BaseViewModel<AppRepository> {
     public BindingCommand registerOnClickCommand = new BindingCommand(new BindingAction() {
         @Override
         public void call() {
-            String name = userName.get();
-            String pwd = userPwd.get();
-            register(name, pwd);
+            Bundle bundle = new Bundle();
+            bundle.putString("phone", userName.get());
+            bundle.putString("code", userPwd.get());
+            startActivity(RegisterActivity.class);
         }
     });
 
@@ -67,7 +69,6 @@ public class LoginViewModel extends BaseViewModel<AppRepository> {
         getHttpRequest(login, new CallBack<UserBean>() {
             @Override
             public void onSuccess(UserBean data) {
-
             }
 
             @Override
@@ -75,37 +76,5 @@ public class LoginViewModel extends BaseViewModel<AppRepository> {
                 ToastUtil.showCustomToast(errorMsg);
             }
         });
-    }
-
-    /**
-     * 注册
-     *
-     * @param phone
-     * @param code
-     */
-    public void register(String phone, String code) {
-        ToastUtil.showCustomToast("姓名:" + userName + ",密码:" + phone);
-        Observable<HttpResult<UserBean>> register = model.register(phone, code);
-        getHttpRequest(register, new CallBack<UserBean>() {
-            @Override
-            public void onSuccess(UserBean data) {
-
-            }
-
-            @Override
-            public void onFail(String code, String errorMsg) {
-                ToastUtil.showCustomToast(errorMsg);
-            }
-        });
-    }
-
-    public void show() {
-        showDialog();
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                dismissDialog();
-            }
-        }, 3000);
     }
 }
