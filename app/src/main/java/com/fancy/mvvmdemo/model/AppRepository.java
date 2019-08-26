@@ -30,6 +30,11 @@ public class AppRepository extends BaseModel implements HttpDataSource {
     }
 
     @Override
+    public void onCleared() {
+        super.onCleared();
+    }
+
+    @Override
     public Observable<HttpResult<UserBean>> login(String name, String pwd) {
         return mHttpDataSource.login(name, pwd);
     }

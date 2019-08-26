@@ -1,8 +1,11 @@
-package com.fancy.mvvmdemo;
+package com.fancy.mvvmdemo.activity;
 
 import android.databinding.ObservableArrayList;
 import android.support.v7.widget.LinearLayoutManager;
 
+import com.fancy.mvvmdemo.BR;
+import com.fancy.mvvmdemo.BaseActivity;
+import com.fancy.mvvmdemo.R;
 import com.fancy.mvvmdemo.adapter.UserInfoAdapter;
 import com.fancy.mvvmdemo.bean.UserBean;
 import com.fancy.mvvmdemo.databinding.ActivityRecyclerBinding;
