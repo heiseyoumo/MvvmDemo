@@ -16,19 +16,20 @@ import io.reactivex.functions.Consumer;
  */
 public class ViewAdapter {
     /**
-     * 1一秒之内防止重复点击
+     * 200毫秒之内防止重复点击
      */
-    public static final int CLICK_INTERVAL = 1;
+    public static final int CLICK_INTERVAL = 200;
 
     @BindingAdapter(value = {"onClickCommand"})
     public static void onClickCommand(View view, final BindingCommand clickCommand) {
         RxView.clicks(view)
-                .throttleFirst(CLICK_INTERVAL, TimeUnit.SECONDS)
+                .throttleFirst(CLICK_INTERVAL, TimeUnit.MILLISECONDS)
                 .subscribe(new Consumer<Object>() {
                     @Override
                     public void accept(Object object) throws Exception {
                         if (clickCommand != null) {
                             clickCommand.execute();
+
                         }
                     }
                 });

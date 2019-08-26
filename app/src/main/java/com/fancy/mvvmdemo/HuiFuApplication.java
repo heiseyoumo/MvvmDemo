@@ -2,7 +2,13 @@ package com.fancy.mvvmdemo;
 
 import android.app.Activity;
 import android.app.Application;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.util.Log;
+
+import com.github.moduth.blockcanary.BlockCanary;
+import com.github.moduth.blockcanary.BlockCanaryContext;
 
 /**
  * @author pengkuanwang
@@ -16,6 +22,7 @@ public class HuiFuApplication extends Application {
         super.onCreate();
         instance = this;
         registerActivityCallBack();
+        BlockCanary.install(this, new AppContext()).start();
     }
 
     public void registerActivityCallBack() {
@@ -51,6 +58,38 @@ public class HuiFuApplication extends Application {
                 AppManager.getAppManager().removeActivity(activity);
             }
         });
+    }
+
+    public class AppContext extends BlockCanaryContext {
+        private static final String TAG = "AppContext";
+
+        @Override
+        public String provideQualifier() {
+            String qualifier = "";
+            try {
+                PackageInfo info = HuiFuApplication.getInstance().getPackageManager()
+                        .getPackageInfo(HuiFuApplication.getInstance().getPackageName(), 0);
+                qualifier += info.versionCode + "_" + info.versionName + "_YYB";
+            } catch (PackageManager.NameNotFoundException e) {
+                Log.e(TAG, "provideQualifier exception", e);
+            }
+            return qualifier;
+        }
+
+        @Override
+        public int provideBlockThreshold() {
+            return 500;
+        }
+
+        @Override
+        public boolean displayNotification() {
+            return BuildConfig.DEBUG;
+        }
+
+        @Override
+        public boolean stopWhenDebugging() {
+            return false;
+        }
     }
 
     public static HuiFuApplication getInstance() {

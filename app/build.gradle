@@ -76,4 +76,12 @@ dependencies {
 
     implementation 'com.google.code.gson:gson:2.8.1'
     implementation 'com.android.support:recyclerview-v7:28.+'
+
+    // 仅在debug包启用BlockCanary进行卡顿监控和提示的话，可以这么用
+    debugImplementation 'com.github.markzhai:blockcanary-android:1.5.0'
+    releaseImplementation 'com.github.markzhai:blockcanary-no-op:1.5.0'
+
+    debugImplementation 'com.squareup.leakcanary:leakcanary-android:1.5'
+    preReleaseImplementation 'com.squareup.leakcanary:leakcanary-android-no-op:1.5'
+    releaseImplementation 'com.squareup.leakcanary:leakcanary-android-no-op:1.5'
 }
