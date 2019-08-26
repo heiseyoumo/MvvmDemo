@@ -3,7 +3,7 @@ package com.fancy.mvvmdemo.util;
 import android.content.Context;
 import android.content.SharedPreferences;
 
-import com.fancy.mvvmdemo.MyApplication;
+import com.fancy.mvvmdemo.HuiFuApplication;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -19,7 +19,7 @@ public class SPUtils {
     private static SPUtils instance = new SPUtils();
 
     private SPUtils() {
-        sharedPreferences = MyApplication.getInstance().getSharedPreferences(File_Name, Context.MODE_PRIVATE);
+        sharedPreferences = HuiFuApplication.getInstance().getSharedPreferences(File_Name, Context.MODE_PRIVATE);
         editor = sharedPreferences.edit();
     }
 

@@ -3,7 +3,7 @@ package com.fancy.mvvmdemo.util;
 import android.text.TextUtils;
 import android.widget.Toast;
 
-import com.fancy.mvvmdemo.MyApplication;
+import com.fancy.mvvmdemo.HuiFuApplication;
 
 /**
  * @author pengkuanwang
@@ -23,7 +23,7 @@ public class ToastUtil {
             return;
         }
         if (toast == null) {
-            toast = Toast.makeText(MyApplication.getInstance(), textStr, Toast.LENGTH_SHORT);
+            toast = Toast.makeText(HuiFuApplication.getInstance(), textStr, Toast.LENGTH_SHORT);
         } else {
             toast.setText(textStr);
         }

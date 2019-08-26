@@ -8,8 +8,8 @@ import android.os.Bundle;
  * @author pengkuanwang
  * @date 2019-08-21
  */
-public class MyApplication extends Application {
-    private static MyApplication instance;
+public class HuiFuApplication extends Application {
+    private static HuiFuApplication instance;
 
     @Override
     public void onCreate() {
@@ -53,7 +53,7 @@ public class MyApplication extends Application {
         });
     }
 
-    public static MyApplication getInstance() {
+    public static HuiFuApplication getInstance() {
         return instance;
     }
 }

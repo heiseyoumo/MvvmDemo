@@ -24,7 +24,7 @@ public class RetrofitClient {
     //缓存时间
     int CACHE_TIME = 10 * 1024 * 1024;
     //缓存存放的文件
-    File httpCacheDirectory = new File(MyApplication.getInstance().getCacheDir(), "goldze_cache");
+    File httpCacheDirectory = new File(HuiFuApplication.getInstance().getCacheDir(), "goldze_cache");
     //缓存对象
     Cache cache = new Cache(httpCacheDirectory, CACHE_TIME);
 

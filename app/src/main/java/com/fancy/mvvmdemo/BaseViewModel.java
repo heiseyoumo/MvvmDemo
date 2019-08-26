@@ -164,7 +164,7 @@ public class BaseViewModel<M extends BaseModel> extends AndroidViewModel impleme
      * @param <T>
      */
     public <T> void getHttpRequest(Observable<HttpResult<T>> observable, final CallBack<T> callBack) {
-        if (!CommonUtil.isNetworkAvailable(MyApplication.getInstance())) {
+        if (!CommonUtil.isNetworkAvailable(HuiFuApplication.getInstance())) {
             ToastUtil.showCustomToast("网络无效");
             return;
         }

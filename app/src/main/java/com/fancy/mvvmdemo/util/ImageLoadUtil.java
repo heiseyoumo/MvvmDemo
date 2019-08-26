@@ -4,7 +4,7 @@ import android.databinding.BindingAdapter;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
-import com.fancy.mvvmdemo.MyApplication;
+import com.fancy.mvvmdemo.HuiFuApplication;
 import com.fancy.mvvmdemo.R;
 
 /**
@@ -15,6 +15,6 @@ public class ImageLoadUtil {
 
     @BindingAdapter({"image"})
     public static void loadImage(ImageView imageView, String url) {
-        Glide.with(MyApplication.getInstance()).load(url).placeholder(R.mipmap.huanzhe).into(imageView);
+        Glide.with(HuiFuApplication.getInstance()).load(url).placeholder(R.mipmap.huanzhe).into(imageView);
     }
 }
