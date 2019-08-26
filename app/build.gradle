@@ -74,7 +74,6 @@ dependencies {
     implementation 'com.github.bumptech.glide:glide:4.9.0'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.9.0'
 
-    implementation 'com.google.code.gson:gson:2.8.1'
     implementation 'com.android.support:recyclerview-v7:28.+'
 
     // 仅在debug包启用BlockCanary进行卡顿监控和提示的话，可以这么用
@@ -84,4 +83,5 @@ dependencies {
     debugImplementation 'com.squareup.leakcanary:leakcanary-android:1.5'
     preReleaseImplementation 'com.squareup.leakcanary:leakcanary-android-no-op:1.5'
     releaseImplementation 'com.squareup.leakcanary:leakcanary-android-no-op:1.5'
+    implementation 'org.greenrobot:eventbus:3.1.1'
 }

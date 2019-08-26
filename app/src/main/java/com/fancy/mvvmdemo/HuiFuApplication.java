@@ -2,6 +2,7 @@ package com.fancy.mvvmdemo;
 
 import android.app.Activity;
 import android.app.Application;
+import android.content.Context;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
@@ -9,6 +10,9 @@ import android.util.Log;
 
 import com.github.moduth.blockcanary.BlockCanary;
 import com.github.moduth.blockcanary.BlockCanaryContext;
+import com.squareup.leakcanary.LeakCanary;
+import com.squareup.leakcanary.RefWatcher;
+
 
 /**
  * @author pengkuanwang
@@ -16,6 +20,7 @@ import com.github.moduth.blockcanary.BlockCanaryContext;
  */
 public class HuiFuApplication extends Application {
     private static HuiFuApplication instance;
+    private RefWatcher refWatcher;
 
     @Override
     public void onCreate() {
@@ -23,6 +28,25 @@ public class HuiFuApplication extends Application {
         instance = this;
         registerActivityCallBack();
         BlockCanary.install(this, new AppContext()).start();
+        if (LeakCanary.isInAnalyzerProcess(this)) {//1
+            // This process is dedicated to LeakCanary for heap analysis.
+            // You should not init your app in this process.
+            return;
+        }
+        LeakCanary.install(this);
+        refWatcher = setupLeakCanary();
+    }
+
+    private RefWatcher setupLeakCanary() {
+        if (LeakCanary.isInAnalyzerProcess(this)) {
+            return RefWatcher.DISABLED;
+        }
+        return LeakCanary.install(this);
+    }
+
+    public static RefWatcher getRefWatcher(Context context) {
+        HuiFuApplication leakApplication = (HuiFuApplication) context.getApplicationContext();
+        return leakApplication.refWatcher;
     }
 
     public void registerActivityCallBack() {
