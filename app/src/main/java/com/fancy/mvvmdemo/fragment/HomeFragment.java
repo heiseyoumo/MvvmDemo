@@ -1,15 +1,13 @@
 package com.fancy.mvvmdemo.fragment;
 
 import com.fancy.mvvmdemo.BR;
-import com.fancy.mvvmdemo.BaseViewModel;
 import com.fancy.mvvmdemo.R;
-import com.fancy.mvvmdemo.databinding.FragmentHomeBinding;
 
 /**
  * @author pengkuanwang
  * @date 2019-08-26
  */
-public class HomeFragment extends BaseFragment<FragmentHomeBinding, BaseViewModel> {
+public class HomeFragment extends BaseFragment {
     @Override
     protected void initData() {
 
