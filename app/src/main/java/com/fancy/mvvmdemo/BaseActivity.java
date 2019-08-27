@@ -1,14 +1,12 @@
 package com.fancy.mvvmdemo;
 
 import android.arch.lifecycle.Observer;
-import android.arch.lifecycle.ViewModel;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.databinding.ViewDataBinding;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.app.FragmentActivity;
 
 import com.fancy.mvvmdemo.util.LoadDialog;
 import com.trello.rxlifecycle2.components.support.RxAppCompatActivity;
@@ -88,17 +86,6 @@ public abstract class BaseActivity<V extends ViewDataBinding, VM extends BaseVie
         binding = DataBindingUtil.setContentView(this, initContentView());
         variableId = initVariableId();
         viewModel = initViewModel();
-        if (viewModel == null) {
-            Class modelClass;
-            Type type = getClass().getGenericSuperclass();
-            if (type instanceof ParameterizedType) {
-                modelClass = (Class) ((ParameterizedType) type).getActualTypeArguments()[1];
-            } else {
-                //如果没有指定泛型参数，则默认使用BaseViewModel
-                modelClass = BaseViewModel.class;
-            }
-            viewModel = (VM) createViewModel(this, modelClass);
-        }
         binding.setVariable(variableId, viewModel);
         /**
          * 通过此方法可以讲BaseViewModel的生命周期跟Activity
@@ -116,7 +103,20 @@ public abstract class BaseActivity<V extends ViewDataBinding, VM extends BaseVie
      * @return 继承BaseViewModel的ViewModel
      */
     public VM initViewModel() {
-        return null;
+        Class modelClass;
+        Type type = getClass().getGenericSuperclass();
+        /**
+         * 是否指定了泛型
+         */
+        if (type instanceof ParameterizedType) {
+            modelClass = (Class) ((ParameterizedType) type).getActualTypeArguments()[1];
+            AppViewModelFactory factory = AppViewModelFactory.getInstance(getApplication());
+            viewModel = (VM) ViewModelProviders.of(this, factory).get(modelClass);
+        } else {
+            modelClass = BaseViewModel.class;
+            viewModel = (VM) ViewModelProviders.of(this).get(modelClass);
+        }
+        return viewModel;
     }
 
     /**
@@ -138,17 +138,6 @@ public abstract class BaseActivity<V extends ViewDataBinding, VM extends BaseVie
      * 初始化数据
      */
     protected abstract void initData();
-
-    /**
-     * 创建ViewModel
-     *
-     * @param cls
-     * @param <T>
-     * @return
-     */
-    public <T extends ViewModel> T createViewModel(FragmentActivity activity, Class<T> cls) {
-        return ViewModelProviders.of(activity).get(cls);
-    }
 
     private void showDialog() {
         loadDialog = new LoadDialog(this, R.style.LoadingDialogTheme);

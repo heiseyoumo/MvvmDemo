@@ -1,10 +1,9 @@
 package com.fancy.mvvmdemo.activity;
 
-import android.arch.lifecycle.ViewModelProviders;
+import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 
-import com.fancy.mvvmdemo.AppViewModelFactory;
 import com.fancy.mvvmdemo.BR;
 import com.fancy.mvvmdemo.BaseActivity;
 import com.fancy.mvvmdemo.R;
@@ -34,16 +33,6 @@ public class MainActivity extends BaseActivity<ActivityMainBinding, MainViewMode
     }
 
     @Override
-    public MainViewModel initViewModel() {
-        /**
-         * 使用自定义的ViewModelFactory来创建ViewModel，如果不重写该方法，
-         * 则默认会调用LoginViewModel(@NonNull Application application)构造方法
-         */
-        AppViewModelFactory factory = AppViewModelFactory.getInstance(getApplication());
-        return ViewModelProviders.of(this, factory).get(MainViewModel.class);
-    }
-
-    @Override
     protected void initData() {
         initFragment();
         binding.bottomBar.setSelected(0);
@@ -67,5 +56,12 @@ public class MainActivity extends BaseActivity<ActivityMainBinding, MainViewMode
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.add(R.id.frameLayout, mFragments.get(0));
         transaction.commitAllowingStateLoss();
+
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                startActivity(RegisterActivity.class);
+            }
+        }, 2000);
     }
 }

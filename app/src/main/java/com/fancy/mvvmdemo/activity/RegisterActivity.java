@@ -1,8 +1,5 @@
 package com.fancy.mvvmdemo.activity;
 
-import android.arch.lifecycle.ViewModelProviders;
-
-import com.fancy.mvvmdemo.AppViewModelFactory;
 import com.fancy.mvvmdemo.BR;
 import com.fancy.mvvmdemo.BaseActivity;
 import com.fancy.mvvmdemo.R;
@@ -17,12 +14,6 @@ public class RegisterActivity extends BaseActivity<ActivityRegisterBinding, Regi
     @Override
     public int initVariableId() {
         return BR.viewModel;
-    }
-
-    @Override
-    public RegisterViewModel initViewModel() {
-        AppViewModelFactory factory = AppViewModelFactory.getInstance(getApplication());
-        return ViewModelProviders.of(this, factory).get(RegisterViewModel.class);
     }
 
     @Override
