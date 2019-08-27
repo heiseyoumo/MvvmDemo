@@ -1,22 +1,38 @@
 package com.fancy.mvvmdemo.activity;
 
+import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
-import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
-import android.view.View;
 
+import com.fancy.mvvmdemo.AppViewModelFactory;
+import com.fancy.mvvmdemo.BR;
+import com.fancy.mvvmdemo.BaseActivity;
 import com.fancy.mvvmdemo.R;
+import com.fancy.mvvmdemo.databinding.ActivityMainBinding;
+import com.fancy.mvvmdemo.viewmodel.MainViewModel;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends BaseActivity<ActivityMainBinding, MainViewModel> {
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        findViewById(R.id.textView).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this, LoginActivity.class));
-            }
-        });
+    protected int initContentView() {
+        return R.layout.activity_main;
+    }
+
+    @Override
+    public int initVariableId() {
+        return BR.viewModel;
+    }
+
+    @Override
+    public MainViewModel initViewModel() {
+        /**
+         * 使用自定义的ViewModelFactory来创建ViewModel，如果不重写该方法，
+         * 则默认会调用LoginViewModel(@NonNull Application application)构造方法
+         */
+        AppViewModelFactory factory = AppViewModelFactory.getInstance(getApplication());
+        return ViewModelProviders.of(this, factory).get(MainViewModel.class);
+    }
+
+    @Override
+    protected void initData() {
+        startActivity(new Intent(MainActivity.this, LoginActivity.class));
     }
 }
