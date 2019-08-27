@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:binding="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
         <variable
-            name="toolbarViewModel"
+            name="viewModel"
             type="com.fancy.mvvmdemo.viewmodel.ToolbarViewModel" />
     </data>
 
@@ -21,8 +20,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:background="@drawable/ic_back_black"
-            binding:onClickCommand="@{toolbarViewModel.backOnClick}" />
+            android:background="@drawable/ic_back_black" />
 
         <TextView
             android:id="@+id/titleTv"

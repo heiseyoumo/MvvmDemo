@@ -1,17 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:binding="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.fancy.mvvmdemo.viewmodel.DemoViewModel" />
+    </data>
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <TextView
-            android:id="@+id/textView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:padding="23dp"
-            android:text="demo"
-            android:textSize="23sp" />
+        <include
+            android:id="@+id/include"
+            layout="@layout/title_bar"
+            binding:toolbarViewModel="@{viewModel.toolbarViewModel}" />
     </RelativeLayout>
 </layout>
