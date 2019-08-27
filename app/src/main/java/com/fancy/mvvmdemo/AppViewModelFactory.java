@@ -6,9 +6,8 @@ import android.arch.lifecycle.ViewModelProvider;
 import android.support.annotation.NonNull;
 
 import com.fancy.mvvmdemo.model.AppRepository;
-import com.fancy.mvvmdemo.viewmodel.LoginViewModel;
-import com.fancy.mvvmdemo.viewmodel.MainViewModel;
-import com.fancy.mvvmdemo.viewmodel.RegisterViewModel;
+
+import java.lang.reflect.Constructor;
 
 /**
  * @author pengkuanwang
@@ -35,16 +34,13 @@ public class AppViewModelFactory extends ViewModelProvider.NewInstanceFactory {
         return INSTANCE;
     }
 
-    @NonNull
     @Override
     public <T extends ViewModel> T create(@NonNull Class<T> modelClass) {
-        if (modelClass.isAssignableFrom(LoginViewModel.class)) {
-            return (T) new LoginViewModel(mApplication, appRepository);
-        } else if (modelClass.isAssignableFrom(RegisterViewModel.class)) {
-            return (T) new RegisterViewModel(mApplication, appRepository);
-        } else if (modelClass.isAssignableFrom(MainViewModel.class)) {
-            return (T) new MainViewModel(mApplication, appRepository);
+        try {
+            Constructor<T> constructor = modelClass.getConstructor(Application.class, AppRepository.class);
+            return constructor.newInstance(mApplication, appRepository);
+        } catch (Exception e) {
+            throw new IllegalArgumentException("Unknown ViewModel class: " + modelClass.getName());
         }
-        throw new IllegalArgumentException("Unknown ViewModel class: " + modelClass.getName());
     }
 }

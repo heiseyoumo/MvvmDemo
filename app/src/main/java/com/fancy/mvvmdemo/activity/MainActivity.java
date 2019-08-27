@@ -60,7 +60,7 @@ public class MainActivity extends BaseActivity<ActivityMainBinding, MainViewMode
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                startActivity(DemoActivity.class);
+                startActivity(LoginActivity.class);
             }
         }, 2000);
     }
