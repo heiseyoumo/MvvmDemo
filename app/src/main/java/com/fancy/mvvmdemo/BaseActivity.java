@@ -11,6 +11,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentActivity;
 
 import com.fancy.mvvmdemo.util.LoadDialog;
+import com.trello.rxlifecycle2.components.support.RxAppCompatActivity;
 
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
@@ -20,7 +21,7 @@ import java.util.Map;
  * @author pengkuanwang
  * @date 2019-08-20
  */
-public abstract class BaseActivity<V extends ViewDataBinding, VM extends BaseViewModel> extends AbsBaseActivity {
+public abstract class BaseActivity<V extends ViewDataBinding, VM extends BaseViewModel> extends RxAppCompatActivity {
     protected V binding;
     protected VM viewModel;
     private int variableId;
@@ -29,6 +30,9 @@ public abstract class BaseActivity<V extends ViewDataBinding, VM extends BaseVie
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if (savedInstanceState != null) {
+            savedInstanceState.remove("android:support:fragments");
+        }
         initViewDataBinding();
         registerUiChangeLiveDataCallBack();
         initData();
@@ -80,12 +84,8 @@ public abstract class BaseActivity<V extends ViewDataBinding, VM extends BaseVie
         });
     }
 
-    @Override
-    protected void initView() {
-        binding = DataBindingUtil.setContentView(this, initContentView());
-    }
-
     public void initViewDataBinding() {
+        binding = DataBindingUtil.setContentView(this, initContentView());
         variableId = initVariableId();
         viewModel = initViewModel();
         if (viewModel == null) {
@@ -109,6 +109,7 @@ public abstract class BaseActivity<V extends ViewDataBinding, VM extends BaseVie
         viewModel.injectLifecycleProvider(this);
     }
 
+
     /**
      * 初始化ViewModel
      *
@@ -124,6 +125,14 @@ public abstract class BaseActivity<V extends ViewDataBinding, VM extends BaseVie
      * @return BR的id
      */
     public abstract int initVariableId();
+
+
+    /**
+     * 初始化布局文件
+     *
+     * @return
+     */
+    protected abstract int initContentView();
 
     /**
      * 初始化数据
