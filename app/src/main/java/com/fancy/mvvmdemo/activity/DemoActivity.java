@@ -23,5 +23,6 @@ public class DemoActivity extends BaseActivity<DemoBinding, DemoViewModel> {
 
     @Override
     protected void initData() {
+        viewModel.initToolBar();
     }
 }

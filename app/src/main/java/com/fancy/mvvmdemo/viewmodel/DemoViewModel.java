@@ -15,4 +15,8 @@ public class DemoViewModel extends ToolbarViewModel<AppRepository> {
     public DemoViewModel(Application application, AppRepository model) {
         super(application, model);
     }
+
+    public void initToolBar() {
+        setTitleText("Demo");
+    }
 }

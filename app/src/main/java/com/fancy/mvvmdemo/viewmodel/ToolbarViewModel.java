@@ -12,17 +12,19 @@ import com.fancy.mvvmdemo.view.BindingAction;
 import com.fancy.mvvmdemo.view.BindingCommand;
 
 /**
- * Create Author：goldze
- * Create Date：2019/01/03
+ * @author pengkuanwang
+ * @date 2019-08-27
  * Description： 对应include标题的ToolbarViewModel
- * Toolbar的封装方式有很多种，具体封装需根据项目实际业务和习惯来编写
- * 所有例子仅做参考,业务多种多样,可能我这里写的例子和你的需求不同，理解如何使用才最重要。
+ * Toolbar的封装方式有很多种，可以继承ViewGroup
  */
-
 public class ToolbarViewModel<M extends BaseModel> extends BaseViewModel<M> {
-    //标题文字
+    /**
+     * 标题文字
+     */
     public ObservableField<String> titleText = new ObservableField<>("");
-    //右边文字
+    /**
+     * 标题右边的文字
+     */
     public ObservableField<String> rightText = new ObservableField<>("更多");
     //右边文字的观察者
     public ObservableInt rightTextVisibleObservable = new ObservableInt(View.GONE);
@@ -30,10 +32,6 @@ public class ToolbarViewModel<M extends BaseModel> extends BaseViewModel<M> {
     public ObservableInt rightIconVisibleObservable = new ObservableInt(View.GONE);
     //兼容dataBinding，去泛型化
     public ToolbarViewModel toolbarViewModel;
-
-    public ToolbarViewModel(@NonNull Application application) {
-        this(application, null);
-    }
 
     public ToolbarViewModel(@NonNull Application application, M model) {
         super(application, model);

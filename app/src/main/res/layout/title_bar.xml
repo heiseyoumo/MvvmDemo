@@ -30,6 +30,7 @@
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:gravity="center"
+            android:text="@{toolbarViewModel.titleText}"
             android:textSize="23dp"
             tools:text="大标题" />
 
@@ -40,6 +41,7 @@
             android:layout_alignParentRight="true"
             android:gravity="center_vertical"
             android:text="右边标题"
+            binding:onClickCommand="@{toolbarViewModel.rightTextOnClick}"
             android:textSize="16sp" />
     </RelativeLayout>
 </layout>

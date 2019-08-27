@@ -5,7 +5,6 @@ import android.databinding.ObservableField;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 
-import com.fancy.mvvmdemo.BaseViewModel;
 import com.fancy.mvvmdemo.activity.RegisterActivity;
 import com.fancy.mvvmdemo.bean.HttpResult;
 import com.fancy.mvvmdemo.bean.UserBean;
@@ -21,7 +20,7 @@ import io.reactivex.Observable;
  * @author pengkuanwang
  * @date 2019-08-21
  */
-public class LoginViewModel extends BaseViewModel<AppRepository> {
+public class LoginViewModel extends ToolbarViewModel<AppRepository> {
     public ObservableField<String> userName = new ObservableField<>();
     public ObservableField<String> userPwd = new ObservableField<>();
 
