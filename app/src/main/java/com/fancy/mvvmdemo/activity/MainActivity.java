@@ -1,7 +1,6 @@
 package com.fancy.mvvmdemo.activity;
 
 import android.arch.lifecycle.ViewModelProviders;
-import android.content.Intent;
 
 import com.fancy.mvvmdemo.AppViewModelFactory;
 import com.fancy.mvvmdemo.BR;
@@ -33,6 +32,6 @@ public class MainActivity extends BaseActivity<ActivityMainBinding, MainViewMode
 
     @Override
     protected void initData() {
-        startActivity(new Intent(MainActivity.this, LoginActivity.class));
+
     }
 }
