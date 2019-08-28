@@ -17,7 +17,6 @@ public class DemoViewModel extends ToolbarViewModel<AppRepository> {
     public BindingCommand showConfirmDialog = new BindingCommand(new BindingAction() {
         @Override
         public void call() {
-            Integer.parseInt("231e");
         }
     });
 

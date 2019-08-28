@@ -1,6 +1,8 @@
 package com.fancy.mvvmdemo.activity;
 
+import android.Manifest;
 import android.os.Handler;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 
@@ -34,6 +36,8 @@ public class MainActivity extends BaseActivity<ActivityMainBinding, MainViewMode
 
     @Override
     protected void initData() {
+        ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE}, 100);
+
         initFragment();
         binding.bottomBar.setSelected(0);
         binding.bottomBar.setOnClickBottomBarListener(new BottomBar.OnClickBottomBarListener() {
