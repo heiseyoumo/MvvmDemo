@@ -26,9 +26,10 @@ import io.reactivex.functions.Consumer;
  */
 public class RegisterViewModel extends ToolbarViewModel<AppRepository> {
     private static final int COUNTDOWN_TIME = 60;
-    Disposable countDisposable;
+    private Disposable countDisposable;
 
     public ObservableField<String> sendCodeContent = new ObservableField<>("发送验证码");
+    public ObservableField<Boolean> sendCodeEnabled = new ObservableField<>(true);
 
     public RegisterViewModel(Application application, AppRepository model) {
         super(application, model);
@@ -50,12 +51,13 @@ public class RegisterViewModel extends ToolbarViewModel<AppRepository> {
                     .doOnNext(new Consumer<Long>() {
                         @Override
                         public void accept(Long aLong) throws Exception {
-                            long time = COUNTDOWN_TIME - aLong;
-                            sendCodeContent.set(time + "s倒计时");
+                            sendCodeContent.set((COUNTDOWN_TIME - aLong) + "s倒计时");
+                            sendCodeEnabled.set(false);
                         }
                     }).doOnComplete(new Action() {
                         @Override
                         public void run() {
+                            sendCodeEnabled.set(true);
                             sendCodeContent.set("重新发送");
                         }
                     }).subscribe();
