@@ -20,12 +20,25 @@
             binding:toolbarViewModel="@{viewModel.toolbarViewModel}" />
 
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:gravity="center"
             android:onClick="@{viewModel.onClickRegister}"
             android:padding="30dp"
             android:text="注册"
-            android:textColor="#f00"
             android:textSize="23sp" />
+
+        <TextView
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/bg_get_msg_code"
+            android:gravity="center"
+            android:padding="8dp"
+            android:text="@{viewModel.sendCodeContent}"
+            android:textColor="#f00"
+            android:textSize="23sp"
+            binding:onClickCommand="@{viewModel.onSendCode}" />
     </LinearLayout>
 </layout>
