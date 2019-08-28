@@ -4,6 +4,9 @@ import android.app.Application;
 import android.databinding.ObservableField;
 
 import com.fancy.mvvmdemo.model.AppRepository;
+import com.fancy.mvvmdemo.util.ToastUtil;
+import com.fancy.mvvmdemo.view.BindingAction;
+import com.fancy.mvvmdemo.view.BindingCommand;
 
 /**
  * @author pengkuanwang
@@ -11,6 +14,13 @@ import com.fancy.mvvmdemo.model.AppRepository;
  */
 public class DemoViewModel extends ToolbarViewModel<AppRepository> {
     public ObservableField<String> content = new ObservableField<>("我是你大爷");
+
+    public BindingCommand showConfirmDialog = new BindingCommand(new BindingAction() {
+        @Override
+        public void call() {
+            ToastUtil.showCustomToast("弹框");
+        }
+    });
 
     public DemoViewModel(Application application, AppRepository model) {
         super(application, model);
