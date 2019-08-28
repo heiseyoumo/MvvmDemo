@@ -35,6 +35,7 @@ public class HuiFuApplication extends Application {
         }
         LeakCanary.install(this);
         refWatcher = setupLeakCanary();
+        CrashHandler.getInstance().init(this);
     }
 
     private RefWatcher setupLeakCanary() {
