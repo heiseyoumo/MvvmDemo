@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:binding="http://schemas.android.com/tools">
 
     <data>
 
@@ -14,19 +14,18 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <com.fancy.mvvmdemo.view.TitleBarLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:titleBar_right_title="右边文案"
-            app:titleBar_title="注册" />
+        <include
+            android:id="@+id/include"
+            layout="@layout/title_bar"
+            binding:toolbarViewModel="@{viewModel.toolbarViewModel}" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:onClick="@{viewModel.onClickRegister}"
             android:padding="30dp"
             android:text="注册"
             android:textColor="#f00"
-            android:textSize="23sp"
-            android:onClick="@{viewModel.onClickRegister}"/>
+            android:textSize="23sp" />
     </LinearLayout>
 </layout>

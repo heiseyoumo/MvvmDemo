@@ -3,7 +3,6 @@ package com.fancy.mvvmdemo.viewmodel;
 import android.app.Application;
 import android.view.View;
 
-import com.fancy.mvvmdemo.BaseViewModel;
 import com.fancy.mvvmdemo.bean.HttpResult;
 import com.fancy.mvvmdemo.bean.UserBean;
 import com.fancy.mvvmdemo.listener.CallBack;
@@ -16,7 +15,7 @@ import io.reactivex.Observable;
  * @author pengkuanwang
  * @date 2019-08-26
  */
-public class RegisterViewModel extends BaseViewModel<AppRepository> {
+public class RegisterViewModel extends ToolbarViewModel<AppRepository> {
     public RegisterViewModel(Application application, AppRepository model) {
         super(application, model);
     }

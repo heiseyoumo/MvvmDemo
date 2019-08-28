@@ -8,6 +8,7 @@ import android.support.annotation.NonNull;
 import com.fancy.mvvmdemo.model.AppRepository;
 
 import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
 
 /**
  * @author pengkuanwang
@@ -37,10 +38,20 @@ public class AppViewModelFactory extends ViewModelProvider.NewInstanceFactory {
     @Override
     public <T extends ViewModel> T create(@NonNull Class<T> modelClass) {
         try {
+            if (modelClass.isAssignableFrom(BaseViewModel.class)) {
+                return (T) new BaseViewModel(mApplication, null);
+            }
             Constructor<T> constructor = modelClass.getConstructor(Application.class, AppRepository.class);
             return constructor.newInstance(mApplication, appRepository);
-        } catch (Exception e) {
-            throw new IllegalArgumentException("Unknown ViewModel class: " + modelClass.getName());
+        } catch (NoSuchMethodException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        } catch (InstantiationException e) {
+            e.printStackTrace();
+        } catch (InvocationTargetException e) {
+            e.printStackTrace();
         }
+        throw new IllegalArgumentException("Unknown ViewModel class: " + modelClass.getName());
     }
 }

@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.fancy.mvvmdemo.AppViewModelFactory;
 import com.fancy.mvvmdemo.BaseViewModel;
 import com.trello.rxlifecycle2.components.support.RxFragment;
 
@@ -48,17 +49,6 @@ public abstract class BaseFragment<V extends ViewDataBinding, VM extends BaseVie
     private void initViewDataBinding() {
         viewModelId = initVariableId();
         viewModel = initViewModel();
-        if (viewModel == null) {
-            Class modelClass;
-            Type type = getClass().getGenericSuperclass();
-            if (type instanceof ParameterizedType) {
-                modelClass = (Class) ((ParameterizedType) type).getActualTypeArguments()[1];
-            } else {
-                //如果没有指定泛型参数，则默认使用BaseViewModel
-                modelClass = BaseViewModel.class;
-            }
-            viewModel = (VM) createViewModel(this, modelClass);
-        }
         binding.setVariable(viewModelId, viewModel);
         //让ViewModel拥有View的生命周期感应
         getLifecycle().addObserver(viewModel);
@@ -91,7 +81,19 @@ public abstract class BaseFragment<V extends ViewDataBinding, VM extends BaseVie
      * @return 继承BaseViewModel的ViewModel
      */
     public VM initViewModel() {
-        return null;
+        Class modelClass;
+        Type type = getClass().getGenericSuperclass();
+        /**
+         * 是否指定了泛型
+         */
+        if (type instanceof ParameterizedType) {
+            modelClass = (Class) ((ParameterizedType) type).getActualTypeArguments()[1];
+        } else {
+            modelClass = BaseViewModel.class;
+        }
+        AppViewModelFactory factory = AppViewModelFactory.getInstance(getActivity().getApplication());
+        viewModel = (VM) ViewModelProviders.of(this, factory).get(modelClass);
+        return viewModel;
     }
 
     /**

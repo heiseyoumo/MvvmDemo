@@ -18,7 +18,7 @@ public class RegisterActivity extends BaseActivity<ActivityRegisterBinding, Regi
 
     @Override
     protected void initData() {
-
+        viewModel.setTitleText("注册");
     }
 
     @Override

@@ -110,12 +110,11 @@ public abstract class BaseActivity<V extends ViewDataBinding, VM extends BaseVie
          */
         if (type instanceof ParameterizedType) {
             modelClass = (Class) ((ParameterizedType) type).getActualTypeArguments()[1];
-            AppViewModelFactory factory = AppViewModelFactory.getInstance(getApplication());
-            viewModel = (VM) ViewModelProviders.of(this, factory).get(modelClass);
         } else {
             modelClass = BaseViewModel.class;
-            viewModel = (VM) ViewModelProviders.of(this).get(modelClass);
         }
+        AppViewModelFactory factory = AppViewModelFactory.getInstance(getApplication());
+        viewModel = (VM) ViewModelProviders.of(this, factory).get(modelClass);
         return viewModel;
     }
 
