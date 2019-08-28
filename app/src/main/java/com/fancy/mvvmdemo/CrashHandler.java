@@ -32,7 +32,7 @@ public class CrashHandler implements Thread.UncaughtExceptionHandler {
      */
     private Map<String, String> info = new HashMap<>();
 
-    private DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+    private DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd-HH-mm-ss");
 
     /**
      * 保证只有一个CrashHandler实例
@@ -99,15 +99,15 @@ public class CrashHandler implements Thread.UncaughtExceptionHandler {
         sb.append(result);
         long timestamp = System.currentTimeMillis();
         String time = formatter.format(new Date());
-        String absolutePath = Environment.getExternalStorageDirectory().getAbsoluteFile().getAbsolutePath() + File.separator + "crash/";
+        String absolutePath = Environment.getExternalStorageDirectory().getAbsoluteFile().getAbsolutePath() + File.separator + "crash" + File.separator;
         String fileName = "crash-" + time + "-" + timestamp + ".log";
-        File file = new File(absolutePath, fileName);
         FileOutputStream fos = null;
         try {
-            if (!file.exists()) {
-                file.createNewFile();
+            File dir = new File(absolutePath);
+            if (!dir.exists()) {
+                dir.mkdirs();
             }
-            fos = new FileOutputStream(file);
+            fos = new FileOutputStream(absolutePath + fileName);
             fos.write(sb.toString().getBytes());
         } catch (FileNotFoundException e) {
             e.printStackTrace();

@@ -1,5 +1,7 @@
 package com.fancy.mvvmdemo.activity;
 
+import android.view.View;
+
 import com.fancy.mvvmdemo.BR;
 import com.fancy.mvvmdemo.BaseActivity;
 import com.fancy.mvvmdemo.R;
@@ -24,5 +26,11 @@ public class DemoActivity extends BaseActivity<DemoBinding, DemoViewModel> {
     @Override
     protected void initData() {
         viewModel.initToolBar();
+        binding.tvShowDialog.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showDialogFragment();
+            }
+        });
     }
 }

@@ -1,30 +1,39 @@
 package com.fancy.mvvmdemo.fragment;
 
-import android.arch.lifecycle.ViewModel;
+import android.app.Dialog;
 import android.arch.lifecycle.ViewModelProviders;
 import android.databinding.DataBindingUtil;
 import android.databinding.ViewDataBinding;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
+import android.support.v4.app.DialogFragment;
+import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.fancy.mvvmdemo.AppViewModelFactory;
 import com.fancy.mvvmdemo.BaseViewModel;
-import com.trello.rxlifecycle2.components.support.RxFragment;
+import com.trello.rxlifecycle2.LifecycleProvider;
+import com.trello.rxlifecycle2.LifecycleTransformer;
+import com.trello.rxlifecycle2.RxLifecycle;
+import com.trello.rxlifecycle2.android.FragmentEvent;
+import com.trello.rxlifecycle2.android.RxLifecycleAndroid;
 
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 
+import io.reactivex.Observable;
+import io.reactivex.subjects.BehaviorSubject;
+
 /**
  * @author pengkuanwang
- * @date 2019-08-26
+ * @date 2019-08-28
  */
-public abstract class BaseFragment<V extends ViewDataBinding, VM extends BaseViewModel> extends RxFragment {
+public abstract class BaseDialogFragment<V extends ViewDataBinding, VM extends BaseViewModel> extends DialogFragment implements LifecycleProvider<FragmentEvent> {
     protected V binding;
     protected VM viewModel;
+    private final BehaviorSubject<FragmentEvent> lifecycleSubject = BehaviorSubject.create();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -42,12 +51,24 @@ public abstract class BaseFragment<V extends ViewDataBinding, VM extends BaseVie
         initData();
     }
 
+    @Override
+    public void onStart() {
+        super.onStart();
+        Dialog dialog = getDialog();
+        if (dialog != null) {
+            DisplayMetrics dm = new DisplayMetrics();
+            getActivity().getWindowManager().getDefaultDisplay().getMetrics(dm);
+            dialog.getWindow().setLayout((dm.widthPixels - 80), ViewGroup.LayoutParams.WRAP_CONTENT);
+        }
+    }
+
     /**
      * 注入绑定
      */
     private void initViewDataBinding() {
+        int viewModelId = initVariableId();
         viewModel = initViewModel();
-        binding.setVariable(initVariableId(), viewModel);
+        binding.setVariable(viewModelId, viewModel);
         //让ViewModel拥有View的生命周期感应
         getLifecycle().addObserver(viewModel);
         //注入RxLifecycle生命周期
@@ -94,14 +115,18 @@ public abstract class BaseFragment<V extends ViewDataBinding, VM extends BaseVie
         return viewModel;
     }
 
-    /**
-     * 创建ViewModel
-     *
-     * @param cls
-     * @param <T>
-     * @return
-     */
-    public <T extends ViewModel> T createViewModel(Fragment fragment, Class<T> cls) {
-        return ViewModelProviders.of(fragment).get(cls);
+    @Override
+    public Observable<FragmentEvent> lifecycle() {
+        return lifecycleSubject.hide();
+    }
+
+    @Override
+    public <T> LifecycleTransformer<T> bindUntilEvent(FragmentEvent event) {
+        return RxLifecycle.bindUntilEvent(lifecycleSubject, event);
+    }
+
+    @Override
+    public <T> LifecycleTransformer<T> bindToLifecycle() {
+        return RxLifecycleAndroid.bindFragment(lifecycleSubject);
     }
 }

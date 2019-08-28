@@ -19,11 +19,19 @@
             binding:toolbarViewModel="@{viewModel.toolbarViewModel}" />
 
         <TextView
+            android:id="@+id/tvShowDialog"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:textSize="23sp"
-            binding:onClickCommand="@{viewModel.showConfirmDialog}"
-            android:text="弹出选择框"/>
+            android:text="弹出选择框"
+            android:textSize="23sp" />
+
+        <TextView
+            android:id="@+id/tvCancel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tvShowDialog"
+            android:text="取消弹框"
+            android:textSize="23sp" />
     </RelativeLayout>
 </layout>
