@@ -1,5 +1,6 @@
 package com.fancy.mvvmdemo.fragment;
 
+import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModel;
 import android.arch.lifecycle.ViewModelProviders;
 import android.databinding.DataBindingUtil;
@@ -13,6 +14,8 @@ import android.view.ViewGroup;
 
 import com.fancy.mvvmdemo.AppViewModelFactory;
 import com.fancy.mvvmdemo.BaseViewModel;
+import com.fancy.mvvmdemo.R;
+import com.fancy.mvvmdemo.util.LoadDialog;
 import com.trello.rxlifecycle2.components.support.RxFragment;
 
 import java.lang.reflect.ParameterizedType;
@@ -25,6 +28,7 @@ import java.lang.reflect.Type;
 public abstract class BaseFragment<V extends ViewDataBinding, VM extends BaseViewModel> extends RxFragment {
     protected V binding;
     protected VM viewModel;
+    private LoadDialog loadDialog;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -39,7 +43,31 @@ public abstract class BaseFragment<V extends ViewDataBinding, VM extends BaseVie
          * 私有的初始化DataBinding和ViewModel方法
          */
         initViewDataBinding();
+        registerUiChangeLiveDataCallBack();
         initData();
+    }
+
+    private void registerUiChangeLiveDataCallBack() {
+/**
+ * 加载框展示
+ */
+        viewModel.getUiChangeLiveData().getShowDialogEvent().observe(this, new Observer<String>() {
+            @Override
+            public void onChanged(@Nullable String s) {
+                System.out.println(s);
+                showDialog();
+            }
+        });
+
+        /**
+         * 加载框消失
+         */
+        viewModel.getUiChangeLiveData().getDismissDialogEvent().observe(this, new Observer<Void>() {
+            @Override
+            public void onChanged(@Nullable Void v) {
+                dismissDialog();
+            }
+        });
     }
 
     /**
@@ -92,6 +120,17 @@ public abstract class BaseFragment<V extends ViewDataBinding, VM extends BaseVie
         AppViewModelFactory factory = AppViewModelFactory.getInstance(getActivity().getApplication());
         viewModel = (VM) ViewModelProviders.of(this, factory).get(modelClass);
         return viewModel;
+    }
+
+    private void showDialog() {
+        loadDialog = new LoadDialog(getActivity(), R.style.LoadingDialogTheme);
+        loadDialog.show();
+    }
+
+    public void dismissDialog() {
+        if (loadDialog != null && loadDialog.isShowing()) {
+            loadDialog.dismiss();
+        }
     }
 
     /**

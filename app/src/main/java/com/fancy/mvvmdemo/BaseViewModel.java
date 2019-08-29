@@ -16,6 +16,7 @@ import com.fancy.mvvmdemo.model.BaseModel;
 import com.fancy.mvvmdemo.util.CommonUtil;
 import com.fancy.mvvmdemo.util.ToastUtil;
 import com.trello.rxlifecycle2.LifecycleProvider;
+import com.trello.rxlifecycle2.LifecycleTransformer;
 
 import java.lang.ref.WeakReference;
 import java.util.HashMap;
@@ -206,8 +207,10 @@ public class BaseViewModel<M extends BaseModel> extends AndroidViewModel impleme
             return;
         }
         ObservableTransformer transformer = RxHelper.handleResult();
+        LifecycleProvider provider = getLifecycleProvider();
+        LifecycleTransformer lifecycleTransformer = provider.bindToLifecycle();
         observable.compose(transformer)
-                .compose(getLifecycleProvider().bindToLifecycle())
+                .compose(lifecycleTransformer)
                 .doOnSubscribe(new Consumer<Disposable>() {
                     @Override
                     public void accept(Disposable disposable) throws Exception {
