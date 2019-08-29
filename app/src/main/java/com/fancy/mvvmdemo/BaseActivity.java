@@ -7,10 +7,8 @@ import android.databinding.DataBindingUtil;
 import android.databinding.ViewDataBinding;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.app.FragmentTransaction;
 
 import com.fancy.mvvmdemo.util.LoadDialog;
-import com.fancy.mvvmdemo.fragment.ConfirmDialogFragment;
 import com.trello.rxlifecycle2.components.support.RxAppCompatActivity;
 
 import java.lang.reflect.ParameterizedType;
@@ -149,26 +147,6 @@ public abstract class BaseActivity<V extends ViewDataBinding, VM extends BaseVie
         if (loadDialog != null && loadDialog.isShowing()) {
             loadDialog.dismiss();
         }
-    }
-
-    ConfirmDialogFragment confirmDialogFragment;
-
-    public void showDialogFragment() {
-        if (confirmDialogFragment == null) {
-            confirmDialogFragment = ConfirmDialogFragment.newInstance("标题", "信息", new ConfirmDialogFragment.ConfirmDialogListener() {
-                @Override
-                public void sure() {
-
-                }
-            });
-        }
-        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-        fragmentTransaction.add(confirmDialogFragment, "haha");
-        fragmentTransaction.commitAllowingStateLoss();
-    }
-
-    public void dismissDialogFragment() {
-        confirmDialogFragment.dismissAllowingStateLoss();
     }
 
     /**

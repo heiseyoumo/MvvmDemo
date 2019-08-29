@@ -48,9 +48,9 @@ public abstract class BaseFragment<V extends ViewDataBinding, VM extends BaseVie
     }
 
     private void registerUiChangeLiveDataCallBack() {
-/**
- * 加载框展示
- */
+        /**
+         * 加载框展示
+         */
         viewModel.getUiChangeLiveData().getShowDialogEvent().observe(this, new Observer<String>() {
             @Override
             public void onChanged(@Nullable String s) {

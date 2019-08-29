@@ -32,7 +32,7 @@ public class CrashHandler implements Thread.UncaughtExceptionHandler {
      */
     private Map<String, String> info = new HashMap<>();
 
-    private DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd-HH-mm-ss");
+    private DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd-HH:mm:ss");
 
     /**
      * 保证只有一个CrashHandler实例

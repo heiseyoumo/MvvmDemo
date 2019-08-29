@@ -6,6 +6,8 @@ import android.databinding.DataBindingUtil;
 import android.databinding.ViewDataBinding;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -23,6 +25,7 @@ import java.lang.reflect.Type;
  * @date 2019-08-28
  */
 public abstract class BaseDialogFragment<V extends ViewDataBinding, VM extends BaseViewModel> extends RxDialogFragment {
+    private static final String TAG = BaseDialogFragment.class.getSimpleName();
     protected V binding;
     protected VM viewModel;
 
@@ -104,5 +107,17 @@ public abstract class BaseDialogFragment<V extends ViewDataBinding, VM extends B
         AppViewModelFactory factory = AppViewModelFactory.getInstance(getActivity().getApplication());
         viewModel = (VM) ViewModelProviders.of(this, factory).get(modelClass);
         return viewModel;
+    }
+
+    /**
+     * 显示DialogFragment为空
+     * 通过getActivity()获取到的activity
+     *
+     * @param manager
+     */
+    public void show(FragmentManager manager) {
+        FragmentTransaction fragmentTransaction = manager.beginTransaction();
+        fragmentTransaction.add(this, TAG);
+        fragmentTransaction.commitAllowingStateLoss();
     }
 }
