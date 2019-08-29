@@ -3,6 +3,7 @@ package com.fancy.mvvmdemo.viewmodel;
 import android.app.Application;
 
 import com.fancy.mvvmdemo.BaseViewModel;
+import com.fancy.mvvmdemo.activity.LoginActivity;
 import com.fancy.mvvmdemo.bean.HttpResult;
 import com.fancy.mvvmdemo.bean.UserBean;
 import com.fancy.mvvmdemo.listener.CallBack;
@@ -25,7 +26,7 @@ public class HomeViewModel extends BaseViewModel<AppRepository> {
     public BindingCommand onClick = new BindingCommand(new BindingAction() {
         @Override
         public void call() {
-            login("pkw", "123456");
+            startActivity(LoginActivity.class);
         }
     });
 

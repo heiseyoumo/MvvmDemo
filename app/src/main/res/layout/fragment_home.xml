@@ -18,8 +18,8 @@
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:padding="30dp"
-            android:text="首页"
-            binding:onClickCommand="@{viewModel.onClick}"
-            android:textSize="23sp" />
+            android:text="登录"
+            android:textSize="23sp"
+            binding:onClickCommand="@{viewModel.onClick}" />
     </RelativeLayout>
 </layout>

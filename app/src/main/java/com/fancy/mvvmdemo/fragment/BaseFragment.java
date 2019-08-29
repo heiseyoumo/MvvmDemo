@@ -1,13 +1,12 @@
 package com.fancy.mvvmdemo.fragment;
 
 import android.arch.lifecycle.Observer;
-import android.arch.lifecycle.ViewModel;
 import android.arch.lifecycle.ViewModelProviders;
+import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.databinding.ViewDataBinding;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,6 +19,7 @@ import com.trello.rxlifecycle2.components.support.RxFragment;
 
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
+import java.util.Map;
 
 /**
  * @author pengkuanwang
@@ -66,6 +66,15 @@ public abstract class BaseFragment<V extends ViewDataBinding, VM extends BaseVie
             @Override
             public void onChanged(@Nullable Void v) {
                 dismissDialog();
+            }
+        });
+
+        viewModel.getUiChangeLiveData().getStartActivityEvent().observe(this, new Observer<Map<String, Object>>() {
+            @Override
+            public void onChanged(@Nullable Map<String, Object> params) {
+                Class<?> clz = (Class<?>) params.get(BaseViewModel.ParameterField.CLASS);
+                Bundle bundle = (Bundle) params.get(BaseViewModel.ParameterField.BUNDLE);
+                startActivity(clz, bundle);
             }
         });
     }
@@ -134,13 +143,25 @@ public abstract class BaseFragment<V extends ViewDataBinding, VM extends BaseVie
     }
 
     /**
-     * 创建ViewModel
+     * 跳转页面
      *
-     * @param cls
-     * @param <T>
-     * @return
+     * @param clz 所跳转的目的Activity类
      */
-    public <T extends ViewModel> T createViewModel(Fragment fragment, Class<T> cls) {
-        return ViewModelProviders.of(fragment).get(cls);
+    public void startActivity(Class<?> clz) {
+        startActivity(new Intent(getContext(), clz));
+    }
+
+    /**
+     * 跳转页面
+     *
+     * @param clz    所跳转的目的Activity类
+     * @param bundle 跳转所携带的信息
+     */
+    public void startActivity(Class<?> clz, Bundle bundle) {
+        Intent intent = new Intent(getContext(), clz);
+        if (bundle != null) {
+            intent.putExtras(bundle);
+        }
+        startActivity(intent);
     }
 }
