@@ -15,19 +15,11 @@ public class LoadDialog extends AlertDialog {
         super(context, themeResId);
     }
 
-    public void dismissLoading() {
-        dismiss();
-    }
-
-    public void showLoading() {
-        show();
-    }
-
     @Override
     public void show() {
         super.show();
         setContentView(R.layout.load_view);
         setCanceledOnTouchOutside(false);
-        setCancelable(false);
+        setCancelable(true);
     }
 }
