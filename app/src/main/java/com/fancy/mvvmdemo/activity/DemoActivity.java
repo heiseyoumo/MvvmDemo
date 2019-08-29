@@ -31,12 +31,7 @@ public class DemoActivity extends BaseActivity<DemoBinding, DemoViewModel> {
         viewModel.showDialog.observe(this, new Observer<Void>() {
             @Override
             public void onChanged(@Nullable Void aVoid) {
-                ConfirmDialogFragment confirmDialogFragment = ConfirmDialogFragment.newInstance("标题", "信息", new ConfirmDialogFragment.ConfirmDialogListener() {
-                    @Override
-                    public void sure() {
-
-                    }
-                });
+                ConfirmDialogFragment confirmDialogFragment = ConfirmDialogFragment.newInstance("标题", "信息");
                 confirmDialogFragment.show(getSupportFragmentManager());
             }
         });

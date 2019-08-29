@@ -10,9 +10,9 @@ import retrofit2.http.Headers;
 import retrofit2.http.POST;
 
 /**
- * Created by wanglijuan on 2017/6/22.
+ * @author pengkuanwang
+ * @date 2019-08-19
  */
-
 public interface ApiService {
     @Headers({"Content-type:application/json;charset=UTF-8"})
     @POST(ApiUrl.LOGIN)

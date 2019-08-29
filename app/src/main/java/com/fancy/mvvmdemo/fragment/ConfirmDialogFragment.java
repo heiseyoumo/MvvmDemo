@@ -1,39 +1,33 @@
 package com.fancy.mvvmdemo.fragment;
 
+import android.arch.lifecycle.Observer;
 import android.os.Bundle;
-import android.view.View;
+import android.support.annotation.Nullable;
 
 import com.fancy.mvvmdemo.BR;
-import com.fancy.mvvmdemo.BaseViewModel;
 import com.fancy.mvvmdemo.R;
 import com.fancy.mvvmdemo.databinding.DialogCodeVerifyBinding;
+import com.fancy.mvvmdemo.viewmodel.DialogFragmentViewModel;
 
 /**
  * @author pengkuanwang
  * @date 2019-08-28
  */
-public class ConfirmDialogFragment extends BaseDialogFragment<DialogCodeVerifyBinding, BaseViewModel> {
-    private ConfirmDialogListener mListener;
-
-    public void setmListener(ConfirmDialogListener mListener) {
-        this.mListener = mListener;
-    }
-
-    public static ConfirmDialogFragment newInstance(String title, String message, ConfirmDialogListener mListener) {
+public class ConfirmDialogFragment extends BaseDialogFragment<DialogCodeVerifyBinding, DialogFragmentViewModel> {
+    public static ConfirmDialogFragment newInstance(String title, String message) {
         ConfirmDialogFragment fragment = new ConfirmDialogFragment();
         Bundle bundle = new Bundle();
         bundle.putString("title", title);
         bundle.putString("message", message);
-        fragment.setmListener(mListener);
         fragment.setArguments(bundle);
         return fragment;
     }
 
     @Override
     protected void initData() {
-        binding.ivClose.setOnClickListener(new View.OnClickListener() {
+        viewModel.closeDialogFragment.observe(this, new Observer<Void>() {
             @Override
-            public void onClick(View v) {
+            public void onChanged(@Nullable Void aVoid) {
                 dismissAllowingStateLoss();
             }
         });
@@ -47,10 +41,5 @@ public class ConfirmDialogFragment extends BaseDialogFragment<DialogCodeVerifyBi
     @Override
     public int initVariableId() {
         return BR.viewModel;
-    }
-
-    public interface ConfirmDialogListener {
-
-        void sure();
     }
 }

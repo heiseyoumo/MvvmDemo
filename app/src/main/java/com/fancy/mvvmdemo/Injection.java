@@ -1,6 +1,7 @@
 package com.fancy.mvvmdemo;
 
 import com.fancy.mvvmdemo.http.ApiService;
+import com.fancy.mvvmdemo.http.RetrofitClient;
 import com.fancy.mvvmdemo.listener.HttpDataSource;
 import com.fancy.mvvmdemo.listener.HttpDataSourceImpl;
 import com.fancy.mvvmdemo.model.AppRepository;

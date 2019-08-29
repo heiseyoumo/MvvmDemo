@@ -1,6 +1,6 @@
-package com.fancy.mvvmdemo;
+package com.fancy.mvvmdemo.http;
 
-import com.fancy.mvvmdemo.http.LoggingInterceptor;
+import com.fancy.mvvmdemo.BuildConfig;
 
 import java.util.concurrent.TimeUnit;
 

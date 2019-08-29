@@ -1,6 +1,7 @@
 package com.fancy.mvvmdemo.fragment;
 
 import android.app.Dialog;
+import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.databinding.DataBindingUtil;
 import android.databinding.ViewDataBinding;
@@ -15,6 +16,8 @@ import android.view.ViewGroup;
 
 import com.fancy.mvvmdemo.AppViewModelFactory;
 import com.fancy.mvvmdemo.BaseViewModel;
+import com.fancy.mvvmdemo.R;
+import com.fancy.mvvmdemo.util.LoadDialog;
 import com.trello.rxlifecycle2.components.support.RxDialogFragment;
 
 import java.lang.reflect.ParameterizedType;
@@ -28,6 +31,7 @@ public abstract class BaseDialogFragment<V extends ViewDataBinding, VM extends B
     private static final String TAG = BaseDialogFragment.class.getSimpleName();
     protected V binding;
     protected VM viewModel;
+    private LoadDialog loadDialog;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -42,6 +46,7 @@ public abstract class BaseDialogFragment<V extends ViewDataBinding, VM extends B
          * 私有的初始化DataBinding和ViewModel方法
          */
         initViewDataBinding();
+        registerUiChangeLiveDataCallBack();
         initData();
     }
 
@@ -54,6 +59,29 @@ public abstract class BaseDialogFragment<V extends ViewDataBinding, VM extends B
             getActivity().getWindowManager().getDefaultDisplay().getMetrics(dm);
             dialog.getWindow().setLayout((dm.widthPixels - 80), ViewGroup.LayoutParams.WRAP_CONTENT);
         }
+    }
+
+    private void registerUiChangeLiveDataCallBack() {
+        /**
+         * 加载框展示
+         */
+        viewModel.getUiChangeLiveData().getShowDialogEvent().observe(this, new Observer<String>() {
+            @Override
+            public void onChanged(@Nullable String s) {
+                System.out.println(s);
+                showDialog();
+            }
+        });
+
+        /**
+         * 加载框消失
+         */
+        viewModel.getUiChangeLiveData().getDismissDialogEvent().observe(this, new Observer<Void>() {
+            @Override
+            public void onChanged(@Nullable Void v) {
+                dismissDialog();
+            }
+        });
     }
 
     /**
@@ -109,9 +137,21 @@ public abstract class BaseDialogFragment<V extends ViewDataBinding, VM extends B
         return viewModel;
     }
 
+    private void showDialog() {
+        loadDialog = new LoadDialog(getActivity(), R.style.LoadingDialogTheme);
+        loadDialog.show();
+    }
+
+    public void dismissDialog() {
+        if (loadDialog != null && loadDialog.isShowing()) {
+            loadDialog.dismiss();
+        }
+    }
+
     /**
      * 显示DialogFragment为空
-     * 通过getActivity()获取到的activity
+     * 通过getActivity()获取到的activity对象为null
+     * 因为fragment的onAttach和onActivityCreated还未执行
      *
      * @param manager
      */
