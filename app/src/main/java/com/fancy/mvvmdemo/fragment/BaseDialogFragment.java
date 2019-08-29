@@ -6,7 +6,6 @@ import android.databinding.DataBindingUtil;
 import android.databinding.ViewDataBinding;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.app.DialogFragment;
 import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,26 +13,18 @@ import android.view.ViewGroup;
 
 import com.fancy.mvvmdemo.AppViewModelFactory;
 import com.fancy.mvvmdemo.BaseViewModel;
-import com.trello.rxlifecycle2.LifecycleProvider;
-import com.trello.rxlifecycle2.LifecycleTransformer;
-import com.trello.rxlifecycle2.RxLifecycle;
-import com.trello.rxlifecycle2.android.FragmentEvent;
-import com.trello.rxlifecycle2.android.RxLifecycleAndroid;
+import com.trello.rxlifecycle2.components.support.RxDialogFragment;
 
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
-
-import io.reactivex.Observable;
-import io.reactivex.subjects.BehaviorSubject;
 
 /**
  * @author pengkuanwang
  * @date 2019-08-28
  */
-public abstract class BaseDialogFragment<V extends ViewDataBinding, VM extends BaseViewModel> extends DialogFragment implements LifecycleProvider<FragmentEvent> {
+public abstract class BaseDialogFragment<V extends ViewDataBinding, VM extends BaseViewModel> extends RxDialogFragment {
     protected V binding;
     protected VM viewModel;
-    private final BehaviorSubject<FragmentEvent> lifecycleSubject = BehaviorSubject.create();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -113,20 +104,5 @@ public abstract class BaseDialogFragment<V extends ViewDataBinding, VM extends B
         AppViewModelFactory factory = AppViewModelFactory.getInstance(getActivity().getApplication());
         viewModel = (VM) ViewModelProviders.of(this, factory).get(modelClass);
         return viewModel;
-    }
-
-    @Override
-    public Observable<FragmentEvent> lifecycle() {
-        return lifecycleSubject.hide();
-    }
-
-    @Override
-    public <T> LifecycleTransformer<T> bindUntilEvent(FragmentEvent event) {
-        return RxLifecycle.bindUntilEvent(lifecycleSubject, event);
-    }
-
-    @Override
-    public <T> LifecycleTransformer<T> bindToLifecycle() {
-        return RxLifecycleAndroid.bindFragment(lifecycleSubject);
     }
 }
