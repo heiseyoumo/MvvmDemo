@@ -2,10 +2,8 @@ package com.fancy.mvvmdemo;
 
 import com.fancy.mvvmdemo.http.LoggingInterceptor;
 
-import java.io.File;
 import java.util.concurrent.TimeUnit;
 
-import okhttp3.Cache;
 import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
@@ -21,12 +19,6 @@ public class RetrofitClient {
     private static final int CONNECT_TIMEOUT = 30;
     private static final int WRITE_TIMEOUT = 300;
     private static final int READ_TIMEOUT = 30;
-    //缓存时间
-    int CACHE_TIME = 10 * 1024 * 1024;
-    //缓存存放的文件
-    File httpCacheDirectory = new File(HuiFuApplication.getInstance().getCacheDir(), "goldze_cache");
-    //缓存对象
-    Cache cache = new Cache(httpCacheDirectory, CACHE_TIME);
 
     private static class SingletonHolder {
         private static RetrofitClient INSTANCE = new RetrofitClient();
@@ -40,8 +32,7 @@ public class RetrofitClient {
         OkHttpClient.Builder httpClientBuilder = new OkHttpClient.Builder();
         httpClientBuilder.connectTimeout(CONNECT_TIMEOUT, TimeUnit.SECONDS)
                 .writeTimeout(WRITE_TIMEOUT, TimeUnit.SECONDS)
-                .readTimeout(READ_TIMEOUT, TimeUnit.SECONDS)
-                .cache(cache);
+                .readTimeout(READ_TIMEOUT, TimeUnit.SECONDS);
         if (BuildConfig.DEBUG) {
             httpClientBuilder.addInterceptor(new LoggingInterceptor());
         }

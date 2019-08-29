@@ -63,10 +63,6 @@ dependencies {
     implementation(rootProject.ext.dependencies["rxlifecycle-components"]) {
         exclude group: 'com.android.support'
     }
-    //rx管理View的生命周期
-    api(rootProject.ext.dependencies.rxlifecycle) {
-        exclude group: 'com.android.support'
-    }
     api(rootProject.ext.dependencies.rxbinding) {
         exclude group: 'com.android.support'
     }
