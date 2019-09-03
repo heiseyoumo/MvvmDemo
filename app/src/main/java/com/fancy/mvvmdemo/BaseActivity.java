@@ -5,11 +5,13 @@ import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.databinding.ViewDataBinding;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 
 import com.fancy.mvvmdemo.util.LoadDialog;
 import com.trello.rxlifecycle2.components.support.RxAppCompatActivity;
+import com.yanzhenjie.sofia.Sofia;
 
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
@@ -31,9 +33,11 @@ public abstract class BaseActivity<V extends ViewDataBinding, VM extends BaseVie
         if (savedInstanceState != null) {
             savedInstanceState.remove("android:support:fragments");
         }
+        getSupportActionBar().hide();
         initViewDataBinding();
         registerUiChangeLiveDataCallBack();
         initData();
+        Sofia.with(this).statusBarBackground(Color.RED);
     }
 
     /**

@@ -14,10 +14,16 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <include
+            android:id="@+id/include"
+            layout="@layout/title_bar"
+            binding:toolbarViewModel="@{viewModel.toolbarViewModel}" />
+
         <EditText
             android:id="@+id/userNameEdt"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_below="@+id/include"
             android:background="@null"
             android:hint="请输入用户名"
             android:padding="10dp"

@@ -13,6 +13,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="50dp"
+        android:background="#f00"
         android:paddingLeft="15dp"
         android:paddingRight="15dp">
 
@@ -41,7 +42,7 @@
             android:layout_alignParentRight="true"
             android:gravity="center_vertical"
             android:text="右边标题"
-            binding:onClickCommand="@{toolbarViewModel.rightTextOnClick}"
-            android:textSize="16sp" />
+            android:textSize="16sp"
+            binding:onClickCommand="@{toolbarViewModel.rightTextOnClick}" />
     </RelativeLayout>
 </layout>

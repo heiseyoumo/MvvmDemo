@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="viewModel"
+            type="com.fancy.mvvmdemo.fragment.PromptDialogFragment" />
+
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#999999"
+        android:paddingTop="20dp">
+
+        <TextView
+            android:id="@+id/prompt_info"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:gravity="center_horizontal"
+            android:text="@{viewModel.infoValue}" />
+
+        <View
+            android:id="@+id/prompt_lines"
+            android:layout_width="match_parent"
+            android:layout_height="0.1dp"
+            android:layout_below="@+id/prompt_info"
+            android:layout_marginTop="15dp"
+            android:background="#f00" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_below="@+id/prompt_lines"
+            android:visibility="@{viewModel.okValue==null?View.VISIBLE:View.GONE}">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:onClick="@{viewModel::cancelClick}"
+                android:text="@{viewModel.cancelValue}" />
+
+            <View
+                android:layout_width="0.1dp"
+                android:layout_height="match_parent"
+                android:layout_below="@+id/prompt_info"
+                android:layout_marginTop="3dp"
+                android:layout_marginBottom="3dp"
+                android:background="#f00" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:onClick="@{viewModel::confirmClick}"
+                android:text="@{viewModel.confirmValue}" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_below="@+id/prompt_lines"
+            android:visibility="@{viewModel.okValue==null?View.GONE:View.VISIBLE}">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:onClick="@{viewModel::okClick}"
+                android:text="@{viewModel.okValue}" />
+        </LinearLayout>
+    </RelativeLayout>
+</layout>

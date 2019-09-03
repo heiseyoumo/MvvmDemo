@@ -1,6 +1,8 @@
 package com.fancy.mvvmdemo.activity;
 
 import android.Manifest;
+import android.content.Intent;
+import android.os.Handler;
 import android.support.v4.app.ActivityCompat;
 
 import com.fancy.mvvmdemo.BR;
@@ -40,6 +42,13 @@ public class MainActivity extends BaseActivity<ActivityMainBinding, MainViewMode
                 fragmentTab.show(tabIndex);
             }
         });
+
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                startActivity(new Intent(MainActivity.this, Demo1Activity.class));
+            }
+        }, 2000);
     }
 
     private void initFragment() {

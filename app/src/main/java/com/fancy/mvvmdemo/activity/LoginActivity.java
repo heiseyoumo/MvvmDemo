@@ -23,5 +23,6 @@ public class LoginActivity extends BaseActivity<ActivityLoginBinding, LoginViewM
 
     @Override
     protected void initData() {
+        viewModel.setTitleText("登录");
     }
 }
